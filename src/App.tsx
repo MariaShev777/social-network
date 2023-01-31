@@ -1,21 +1,15 @@
 import React from 'react';
 import './App.css';
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Profile from "./components/Profile/Profile";
 
 function App() {
     return (
         <div className="app-wrapper">
-            <header className="header">
-                <img alt="nike"
-                     src="https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png"
-                />
-            </header>
-            <nav className="nav">
-                <div>Profile</div>
-                <div>Messages</div>
-            </nav>
-            <div className="content">
-                Main content
-            </div>
+            <Header/>
+            <Navbar/>
+            <Profile/>
         </div>
     );
 }
