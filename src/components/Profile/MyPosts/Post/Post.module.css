@@ -6,3 +6,6 @@
     width: 80px;
     border-radius: 30px;
 }
+.item .likes {
+    color: red;
+}
