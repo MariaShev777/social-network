@@ -15,7 +15,7 @@ const Post = (props: PostType) => {
             <img src="https://www.surfertoday.com/images/stories/surfingdog.jpg"/>
             {props.message}
             <div>
-                <span>like{props.likes}</span>
+                <span>like</span> {props.likes}
             </div>
         </div>
     )
