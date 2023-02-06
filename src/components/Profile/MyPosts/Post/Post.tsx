@@ -3,8 +3,9 @@ import s from './Post.module.css';
 
 
 type PostType = {
+    id: number
     message: string
-    likes: number
+    likesCount: number
 }
 
 
@@ -15,7 +16,7 @@ const Post = (props: PostType) => {
             <img src="https://www.surfertoday.com/images/stories/surfingdog.jpg"/>
             {props.message}
             <div className={s.likes}>
-                <span>like</span> {props.likes}
+                <span>like</span> {props.likesCount}
             </div>
         </div>
     )
