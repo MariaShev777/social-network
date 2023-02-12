@@ -5,7 +5,6 @@ import DialogueItem from "./DialogueItem/DialogueItem";
 
 
 
-
 const Dialogues = () => {
 
     let dialogues = [
@@ -13,8 +12,8 @@ const Dialogues = () => {
         {id: 2, name: "Richi"},
         {id: 3, name: "Musya"},
         {id: 4, name: "Sharik"},
-        {id: 5, name: "Lessi"},
-    ]
+        {id: 5, name: "Lessi"}
+    ];
 
     let messages = [
         {id: 1, message: "Meeooww"},
