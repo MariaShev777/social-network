@@ -3,25 +3,29 @@ import s from "./Dialogues.module.css";
 import Message from "./Message/Message";
 import DialogueItem from "./DialogueItem/DialogueItem";
 
-type DialoguesType = {
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogueType = {
     id: number
     name: string
 }
 
-type MessagesType = {
-    id: number
-    message: string
+type DialoguesPageType = {
+    dialogues: DialogueType[]
+    messages: MessageType[]
 }
 
 type DialoguesPropsType = {
-    dialogues: DialoguesType[]
-    messages: MessagesType[]
+    state: DialoguesPageType
 }
+
 
 const Dialogues = (props: DialoguesPropsType) => {
 
-    let dialoguesElements = props.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialoguesElements = props.state.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>)
+    let messagesElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
 
 
     return (

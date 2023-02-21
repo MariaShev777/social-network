@@ -10,38 +10,48 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 
-type DialoguesType = {
+type MessageType = {
    id: number
-   name: string
+   message: string
 }
-
-type MessagesType = {
+type DialogueType = {
     id: number
-    message: string
+    name: string
 }
 
-type PostsType = {
+type PostType = {
     id: number
     message: string
     likesCount: number
 }
 
-type AppPropsType = {
-    dialogues: DialoguesType[]
-    messages: MessagesType[]
-    posts: PostsType[]
+type ProfilePageType = {
+    posts: PostType[]
+}
+type DialoguesPageType = {
+    dialogues: DialogueType[]
+    messages: MessageType[]
+}
+
+type RootStateType = {
+    profilePage: ProfilePageType
+    dialoguesPage: DialoguesPageType
+}
+
+type AppProps = {
+    state: RootStateType
 }
 
 
-function App(props: AppPropsType) {
+function App(props: AppProps ) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile posts={props.posts}/>}/>
-                    <Route path="/dialogues" render={() => <Dialogues dialogues={props.dialogues} messages={props.messages} />}/>
+                    <Route path="/profile" render={() => <Profile state={props.state.profilePage.posts}/>}/>
+                    <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

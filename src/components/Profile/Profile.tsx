@@ -3,14 +3,16 @@ import s from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-type PostsType = {
+
+
+type PostType = {
     id: number
     message: string
     likesCount: number
 }
 
 type ProfilePropsType = {
-    posts: PostsType[]
+   state: PostType[]
 }
 
 
@@ -18,7 +20,7 @@ const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts state={props.state}/>
         </div>
     )
 };
