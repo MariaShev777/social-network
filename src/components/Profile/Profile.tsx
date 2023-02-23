@@ -12,7 +12,8 @@ type PostType = {
 }
 
 type ProfilePropsType = {
-   state: PostType[]
+    state: PostType[]
+    addPost: (postMessage: string) => void
 }
 
 
@@ -20,7 +21,7 @@ const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts state={props.state}/>
+            <MyPosts state={props.state} addPost={props.addPost} />
         </div>
     )
 };

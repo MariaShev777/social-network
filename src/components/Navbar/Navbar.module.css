@@ -14,3 +14,9 @@
 .item a.activeLink {
     color: gold;
 }
+
+.friendsBar {
+    margin-top: 50px;
+    color: white;
+    font-size: 30px;
+}
