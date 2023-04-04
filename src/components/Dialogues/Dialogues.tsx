@@ -2,15 +2,8 @@ import React from "react";
 import s from "./Dialogues.module.css";
 import Message from "./Message/Message";
 import DialogueItem from "./DialogueItem/DialogueItem";
+import {DialogueType, MessageType} from "../../App";
 
-type MessageType = {
-    id: number
-    message: string
-}
-type DialogueType = {
-    id: number
-    name: string
-}
 
 type DialoguesPageType = {
     dialogues: DialogueType[]

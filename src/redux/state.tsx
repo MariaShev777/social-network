@@ -7,7 +7,8 @@ let state = {
             {id: 2, message: "It's my first post", likesCount: 21},
             {id: 3, message: "WoW", likesCount: 25},
             {id: 4, message: "See ya", likesCount: 29}
-        ]
+        ],
+        newPostText: 'chto-to'
     },
     dialoguesPage: {
         dialogues: [
@@ -39,15 +40,21 @@ let state = {
 export default state
 
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
 
     const newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 

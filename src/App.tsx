@@ -8,14 +8,14 @@ import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {addPost} from "./redux/state";
+import {updateNewPostText} from "./redux/state";
 
 
-type MessageType = {
+export type MessageType = {
    id: number
    message: string
 }
-type DialogueType = {
+export type DialogueType = {
     id: number
     name: string
 }
@@ -32,8 +32,9 @@ type FriendsType = {
     ava: string
 }
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: PostType[]
+    newPostText: string
 }
 type DialoguesPageType = {
     dialogues: DialogueType[]
@@ -52,7 +53,8 @@ export type RootStateType = {
 
 type AppProps = {
     state: RootStateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 
@@ -62,7 +64,9 @@ function App(props: AppProps ) {
                 <Header/>
                 <Navbar friendsBar={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile state={props.state.profilePage.posts} addPost={addPost}/>}/>
+                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage}
+                                                                  addPost={props.addPost}
+                                                                  updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
