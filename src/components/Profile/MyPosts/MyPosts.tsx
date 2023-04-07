@@ -7,8 +7,7 @@ import {PostType} from "../../../App";
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -20,14 +19,14 @@ const MyPosts = (props: MyPostsPropsType) => {
     let addPost = () => {
         // let text = newPostElement.current?.value;
         // if (text) {
-            props.addPost();
+            props.dispatch({type: 'ADD-POST'});
         }
         // newPostElement.current!.value = ''
 
     let onPostChange = () => {
         let text = newPostElement.current?.value;
         if (text) {
-            props.updateNewPostText(text);
+            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
         }
     }
 

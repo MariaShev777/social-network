@@ -52,8 +52,7 @@ export type RootStateType = {
 
 type AppProps = {
     state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 
@@ -63,14 +62,11 @@ function App(props: AppProps ) {
                 <Header/>
                 <Navbar friendsBar={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage}
-                                                                  addPost={props.addPost}
-                                                                  updateNewPostText={props.updateNewPostText}/>}/>
+                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage} dispatch={props.dispatch}/>}/>
                     <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
-
                 </div>
             </div>
     );

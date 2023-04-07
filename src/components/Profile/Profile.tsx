@@ -8,8 +8,7 @@ import {ProfilePageType} from "../../App";
 
 type ProfilePropsType = {
     posts: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
 
@@ -19,8 +18,7 @@ const Profile = (props: ProfilePropsType) => {
             <ProfileInfo/>
             <MyPosts posts={props.posts.posts}
                      newPostText={props.posts.newPostText}
-                     addPost={props.addPost}
-                     updateNewPostText={props.updateNewPostText}/>
+                     dispatch={props.dispatch}/>
         </div>
     )
 };
