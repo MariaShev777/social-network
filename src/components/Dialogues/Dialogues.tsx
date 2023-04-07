@@ -12,6 +12,7 @@ type DialoguesPageType = {
 
 type DialoguesPropsType = {
     state: DialoguesPageType
+    // addMessage: () => void
 }
 
 
@@ -19,21 +20,29 @@ const Dialogues = (props: DialoguesPropsType) => {
 
     let dialoguesElements = props.state.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>)
     let messagesElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
+
     let newMessage = React.createRef<HTMLTextAreaElement>()
 
 
-    let onClickHandler = () => {
-        let message = newMessage.current?.value;
-        alert(message)
+    let addMessageChangeHandler = () => {
+        // props.addMessage()
+    }
+
+
+    let onMessageChange = () => {
+    //     let text = newMessage.current?.value;
+    //     if (text) {
+    //         props.updateMessagesText(text);
+    //     }
     }
 
     return (
         <div className={s.dialogues}>
             <div className={s.dialoguesItems}>{dialoguesElements}</div>
             <div className={s.messages}>{messagesElements}</div>
-            <span>
-                <textarea ref={newMessage}></textarea>
-                <button onClick={onClickHandler}>ADD</button>
+            <span style={{paddingLeft: '10px'}}>
+                <textarea onChange={onMessageChange} ref={newMessage} style={{paddingLeft: '10px'}}></textarea>
+                <button onClick={addMessageChangeHandler}>ADD</button>
             </span>
         </div>
     )
