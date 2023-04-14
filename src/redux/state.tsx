@@ -1,9 +1,11 @@
 import {RootStateType} from "../App";
+import sharik from './imgs/sharik.jpg'
+import richi from './imgs/richi.jpg'
+import musya from './imgs/musya.jpg'
+import profileReducer from "./profileReducer";
+import dialoguesReducer from "./dialoguesReducer";
+import sidebarReducer from "./sidebarReducer";
 
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let store = {
     _state: {
@@ -39,17 +41,17 @@ let store = {
                 {
                     id: 1,
                     friendName: "Richi",
-                    ava: 'https://www.google.com/search?q=dog+avatar+picture&tbm=isch&ved=2ahUKEwicy4fNr6v9AhWSyyoKHUY8CQwQ2-cCegQIABAA&oq=dog+avatar+picture&gs_lcp=CgNpbWcQAzoECCMQJ1CSBli0CGDpDGgAcAB4AIABWIgB1gKSAQE0mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=bzf3Y9zXIZKXqwHG-KRg&bih=969&biw=1920#imgrc=6Zebd7wGmuJVBM'
+                    ava: richi
                 },
                 {
                     id: 2,
                     friendName: "Musya",
-                    ava: 'https://www.google.com/search?q=cat%20avatar%20profile&tbm=isch&tbs=rimg:CZ1-VGWQCy_XYejLDCY5OnhgsgIMCgIIABAAOgQIABAA&hl=ru&sa=X&ved=0CBwQuIIBahcKEwiggt6PsKv9AhUAAAAAHQAAAAAQDg&biw=1903&bih=969#imgrc=nVbbKt8vPmemNM'
+                    ava: musya
                 },
                 {
                     id: 3,
                     friendName: "Sharik",
-                    ava: 'https://www.google.com/search?q=dog+picture+cute&tbm=isch&ved=2ahUKEwilwJ7msKv9AhXDuCoKHcGWAvwQ2-cCegQIABAA&oq=dog+picture+cute&gs_lcp=CgNpbWcQAzIHCAAQgAQQEzIHCAAQgAQQEzIICAAQBxAeEBMyCAgAEAgQHhATMggIABAIEB4QEzIICAAQCBAeEBMyCAgAEAgQHhATMggIABAIEB4QEzIICAAQCBAeEBMyCAgAEAgQHhATOgQIIxAnUP4FWP4FYJ8HaABwAHgAgAFbiAG1AZIBATKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=sDj3Y6WoMMPxqgHBrYrgDw&bih=969&biw=1903&hl=ru#imgrc=OuN2RLRD8b4IWM&imgdii=u61zC0xCLTOo1M'
+                    ava: sharik
                 }
             ]
         }
@@ -66,46 +68,14 @@ let store = {
     },
 
     dispatch(action: any) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialoguesPage.newMessageText = action.newMsgText;
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let newMsgText = this._state.dialoguesPage.newMessageText;
-            this._state.dialoguesPage.newMessageText = '';
-            this._state.dialoguesPage.messages.push({id: 6, message: newMsgText});
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber(this._state);
     }
 }
-export const addPostActionCreator = () => ({type: ADD_POST});
 
-export const updateNewPostTextActionCreator = (text: string) => (
-    {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
-)
-
-export const updateNewMessageTextCreator = (text: string) => (
-    {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMsgText: text
-    }
-)
-
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
 
 
 // export const updateNewPostTextActionCreator = (text: string) => {

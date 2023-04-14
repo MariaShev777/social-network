@@ -3,7 +3,7 @@ import s from "./Dialogues.module.css";
 import Message from "./Message/Message";
 import DialogueItem from "./DialogueItem/DialogueItem";
 import {DialogueType, MessageType} from "../../App";
-import {sendMessageCreator, updateNewMessageTextCreator} from "../../redux/state";
+import {sendMessageCreator, updateNewMessageTextCreator} from "../../redux/dialoguesReducer";
 
 
 type DialoguesPageType = {

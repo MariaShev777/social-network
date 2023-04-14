@@ -30,16 +30,17 @@ const Navbar = (props: NavbarPropsType) => {
             <div className={s.item}>
                 <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
+
             <div className={s.friendsBar}>FRIENDS</div>
-            <span>
-                    {props.friendsBar.map(el => {
-                        return (
-                            <span key={el.id}>
-                           <img src={el.ava}  />
-                                {el.friendName }
-                            </span>)
-                    })}
-            </span>
+            <div className={s.friends}>{props.friendsBar.map(el => {
+                return (
+                    <div key={el.id} className={s.friend}><img src={el.ava}/>
+                        <div>{el.friendName}</div>
+                    </div>
+                )
+            })}
+            </div>
+
         </nav>
     )
 };
