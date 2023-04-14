@@ -35,9 +35,10 @@ export type ProfilePageType = {
     posts: PostType[]
     newPostText: string
 }
-type DialoguesPageType = {
+export type DialoguesPageType = {
     dialogues: DialogueType[]
     messages: MessageType[]
+    newMessageText: string
 }
 
 type SidebarType = {
@@ -56,14 +57,14 @@ type AppProps = {
 }
 
 
-function App(props: AppProps ) {
+function App (props: AppProps) {
     return (
             <div className="app-wrapper">
                 <Header/>
                 <Navbar friendsBar={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile posts={props.state.profilePage} dispatch={props.dispatch}/>}/>
-                    <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} />}/>
+                    <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} dispatch={props.dispatch} />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

@@ -2,6 +2,8 @@ import {RootStateType} from "../App";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let store = {
     _state: {
@@ -30,6 +32,7 @@ let store = {
                 {id: 4, message: "Prr-r-rrr"},
                 {id: 5, message: "Prr-r-rrr"}
             ],
+            newMessageText: ''
         },
         sidebar: {
             friends: [
@@ -51,18 +54,18 @@ let store = {
             ]
         }
     },
-    _callSubscriber (state: RootStateType) {
+    _callSubscriber(state: RootStateType) {
         console.log('state has been changed');
     },
 
-    getState () {
+    getState() {
         return this._state;
     },
     subscribe(observer: (state: RootStateType) => void) {
         this._callSubscriber = observer;
     },
 
-    dispatch (action: any) {
+    dispatch(action: any) {
         if (action.type === ADD_POST) {
             const newPost = {
                 id: 5,
@@ -72,14 +75,20 @@ let store = {
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT){
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialoguesPage.newMessageText = action.newMsgText;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let newMsgText = this._state.dialoguesPage.newMessageText;
+            this._state.dialoguesPage.newMessageText = '';
+            this._state.dialoguesPage.messages.push({id: 6, message: newMsgText});
+            this._callSubscriber(this._state);
         }
-
     }
 }
-
 export const addPostActionCreator = () => ({type: ADD_POST});
 
 export const updateNewPostTextActionCreator = (text: string) => (
@@ -88,6 +97,16 @@ export const updateNewPostTextActionCreator = (text: string) => (
         newText: text
     }
 )
+
+export const updateNewMessageTextCreator = (text: string) => (
+    {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        newMsgText: text
+    }
+)
+
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+
 
 // export const updateNewPostTextActionCreator = (text: string) => {
 //     return {
