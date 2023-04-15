@@ -41,7 +41,7 @@ export type DialoguesPageType = {
     newMessageText: string
 }
 
-type SidebarType = {
+export type SidebarType = {
     friends: FriendsType[]
 }
 
