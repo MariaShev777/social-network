@@ -9,11 +9,14 @@ import {BrowserRouter} from "react-router-dom";
 const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+            <App store={store.getState()}/>
         </BrowserRouter>, document.getElementById('root')
     );
 }
 rerenderEntireTree(store.getState());
 
-// @ts-ignore
-store.subscribe(rerenderEntireTree);
+
+store.subscribe(() => {
+    let state = store.getState();
+    rerenderEntireTree(state);
+});

@@ -13,26 +13,29 @@ type DialoguesPageType = {
 }
 
 type DialoguesPropsType = {
-    state: DialoguesPageType
-    dispatch: (action: any) => void
+    dialoguesPage: DialoguesPageType
+    updateNewMessageText: (text: string) => any
+    sendMessage: () => void
 }
 
 
 const Dialogues = (props: DialoguesPropsType) => {
 
-    let dialoguesElements = props.state.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>)
-    let messagesElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let state = props.dialoguesPage;
 
-    let newMessage = props.state.newMessageText;
+    let dialoguesElements = state.dialogues.map(d => <DialogueItem name={d.name} id={d.id}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message} id={m.id}/>)
+
+    let newMessage = state.newMessageText;
 
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator());
+        props.sendMessage();
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.target.value
-        props.dispatch(updateNewMessageTextCreator(text))
+        let text = e.target.value;
+        props.updateNewMessageText(text);
     }
 
 

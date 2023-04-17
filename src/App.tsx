@@ -3,11 +3,12 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogues from "./components/Dialogues/Dialogues";
 import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import DialoguesContainer from "./components/Dialogues/DialoguesContainer";
+import store from "./redux/redux-store";
 
 
 export type MessageType = {
@@ -52,8 +53,7 @@ export type RootStateType = {
 }
 
 type AppProps = {
-    state: RootStateType
-    dispatch: (action: any) => void
+    store: any
 }
 
 
@@ -61,10 +61,10 @@ function App (props: AppProps) {
     return (
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friendsBar={props.state.sidebar.friends}/>
+                <Navbar friendsBar={store.getState().sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage} dispatch={props.dispatch}/>}/>
-                    <Route path="/dialogues" render={() => <Dialogues state={props.state.dialoguesPage} dispatch={props.dispatch} />}/>
+                    <Route path="/profile" render={() => <Profile store={props.store}/>}/>
+                    <Route path="/dialogues" render={() => <DialoguesContainer store={props.store} />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
