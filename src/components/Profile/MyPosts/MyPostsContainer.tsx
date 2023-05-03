@@ -1,10 +1,11 @@
 import React from "react";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
+import {RootStateType, StoreType} from "../../../redux/store";
 
 
 type MyPostsContainerPropsType = {
-    store: any
+    store: StoreType
 }
 
 const MyPostsContainer = (props: MyPostsContainerPropsType) => {

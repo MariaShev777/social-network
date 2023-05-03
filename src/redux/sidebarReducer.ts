@@ -1,7 +1,7 @@
 import richi from "./imgs/richi.jpg";
 import musya from "./imgs/musya.jpg";
 import sharik from "./imgs/sharik.jpg";
-import {SidebarType} from "../App";
+import {SidebarType} from "./store";
 
 let initialState = {
     friends: [

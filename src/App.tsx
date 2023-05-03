@@ -8,60 +8,18 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialoguesContainer from "./components/Dialogues/DialoguesContainer";
-import store from "./redux/redux-store";
+import {RootStateType, StoreType} from "./redux/store";
 
-
-export type MessageType = {
-   id: number
-   message: string
-}
-export type DialogueType = {
-    id: number
-    name: string
-}
-
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-type FriendsType = {
-    id: number
-    friendName: string
-    ava: string
-}
-
-export type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
-}
-export type DialoguesPageType = {
-    dialogues: DialogueType[]
-    messages: MessageType[]
-    newMessageText: string
-}
-
-export type SidebarType = {
-    friends: FriendsType[]
-}
-
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialoguesPage: DialoguesPageType
-    sidebar: SidebarType
-}
-
-type AppProps = {
-    store: any
+type AppPropsType = {
+    store: StoreType
 }
 
 
-function App (props: AppProps) {
+function App (props: AppPropsType) {
     return (
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friendsBar={store.getState().sidebar.friends}/>
+                <Navbar friendsBar={props.store.getState().sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile store={props.store}/>}/>
                     <Route path="/dialogues" render={() => <DialoguesContainer store={props.store} />}/>

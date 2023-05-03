@@ -1,13 +1,63 @@
-import {RootStateType} from "../App";
 import sharik from './imgs/sharik.jpg'
 import richi from './imgs/richi.jpg'
 import musya from './imgs/musya.jpg'
-import profileReducer from "./profileReducer";
-import dialoguesReducer from "./dialoguesReducer";
+import profileReducer, {ProfilePageActionsType} from "./profileReducer";
+import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
 import sidebarReducer from "./sidebarReducer";
 
 
-let store = {
+export type ActionsType = ProfilePageActionsType | DialoguesPageActionsType;
+
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogueType = {
+    id: number
+    name: string
+}
+
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type FriendsType = {
+    id: number
+    friendName: string
+    ava: string
+}
+
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
+export type DialoguesPageType = {
+    dialogues: DialogueType[]
+    messages: MessageType[]
+    newMessageText: string
+}
+
+export type SidebarType = {
+    friends: FriendsType[]
+}
+
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialoguesPage: DialoguesPageType
+    sidebar: SidebarType
+}
+
+export type StoreType = {
+    _state:  RootStateType
+    _callSubscriber: (state: RootStateType) => void
+    getState: () => RootStateType
+    subscribe: (observer: (state: RootStateType) => void) => void
+    dispatch: (action: ActionsType) => void
+}
+
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -67,7 +117,7 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action: any) {
+    dispatch(action: ActionsType ) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)

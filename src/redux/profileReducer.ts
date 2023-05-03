@@ -1,7 +1,4 @@
-import {ProfilePageType} from "../App";
-
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+import {ProfilePageType} from "./store";
 
 
 let initialState = {
@@ -14,9 +11,11 @@ let initialState = {
     newPostText: "chto-to"
 };
 
-const profileReducer = (state: ProfilePageType = initialState, action: any) => {
+export type ProfilePageActionsType = AddPostActionCreatorType | UpdateNewPostTextActionCreatorType;
+
+const profileReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType):ProfilePageType => {
     switch (action.type) {
-        case ADD_POST: {
+        case "ADD-POST": {
             const newPost = {
                 id: 5,
                 message: state.newPostText,
@@ -27,7 +26,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: any) => {
             return state
         }
 
-        case UPDATE_NEW_POST_TEXT: {
+        case "UPDATE-NEW-POST-TEXT": {
             state.newPostText = action.newText;
             return state;
         }
@@ -36,14 +35,18 @@ const profileReducer = (state: ProfilePageType = initialState, action: any) => {
             return state
     }
 }
+export type AddPostActionCreatorType = ReturnType<typeof addPostActionCreator>
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export type UpdateNewPostTextActionCreatorType = ReturnType<typeof updateNewPostTextActionCreator>
 
-export const updateNewPostTextActionCreator = (text: string) => (
-    {
-        type: UPDATE_NEW_POST_TEXT,
+export const addPostActionCreator = () => ({type: "ADD-POST"} as const);
+
+export const updateNewPostTextActionCreator = (text: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
         newText: text
-    }
-)
+    } as const
+}
+
 
 export default profileReducer;

@@ -1,7 +1,4 @@
-import {DialoguesPageType} from "../App";
-
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-const SEND_MESSAGE = "SEND-MESSAGE"
+import {DialoguesPageType} from "./store";
 
 
 let initialState = {
@@ -23,15 +20,16 @@ let initialState = {
     newMessageText: ""
 };
 
+export type DialoguesPageActionsType = UpdateNewMessageTextCreatorType | SendMessageCreatorType;
 
-const dialoguesReducer = (state: DialoguesPageType = initialState, action: any) => {
+const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT: {
+        case 'UPDATE-NEW-MESSAGE-TEXT': {
             state.newMessageText = action.newMsgText;
             return state;
         }
         case
-        SEND_MESSAGE: {
+        "SEND-MESSAGE": {
             let newMsgText = state.newMessageText;
             state.newMessageText = "";
             state.messages.push({id: 6, message: newMsgText});
@@ -42,13 +40,17 @@ const dialoguesReducer = (state: DialoguesPageType = initialState, action: any) 
     }
 }
 
-export const updateNewMessageTextCreator = (text: string) => (
-    {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMsgText: text
-    }
-)
+type UpdateNewMessageTextCreatorType = ReturnType<typeof updateNewMessageTextCreator>
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
+
+export const updateNewMessageTextCreator = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMsgText: text
+    } as const
+}
+
+export const sendMessageCreator = () => ({type: "SEND-MESSAGE"} as const)
 
 export default dialoguesReducer;
