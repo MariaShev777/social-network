@@ -24,17 +24,19 @@ export type DialoguesPageActionsType = UpdateNewMessageTextCreatorType | SendMes
 
 const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType) => {
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            state.newMessageText = action.newMsgText;
-            return state;
-        }
-        case
-        "SEND-MESSAGE": {
+        case "UPDATE-NEW-MESSAGE-TEXT":
+            return {
+                ...state,
+                newMessageText: action.newMsgText
+            };
+        case "SEND-MESSAGE":
             let newMsgText = state.newMessageText;
-            state.newMessageText = "";
-            state.messages.push({id: 6, message: newMsgText});
-            return state;
-        }
+            return {
+                ...state,
+                newMessageText: "",
+                messages: [...state.messages, {id: 6, message: newMsgText}]
+            };
+
         default:
             return state
     }
@@ -46,7 +48,7 @@ type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
 
 export const updateNewMessageTextCreator = (text: string) => {
     return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        type: "UPDATE-NEW-MESSAGE-TEXT",
         newMsgText: text
     } as const
 }
