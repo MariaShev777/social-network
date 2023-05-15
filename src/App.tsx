@@ -8,21 +8,18 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialoguesContainer from "./components/Dialogues/DialoguesContainer";
-import {RootStateType, StoreType} from "./redux/store";
-
-type AppPropsType = {
-    store: StoreType
-}
+import {StoreType} from "./redux/store";
+import store from "./redux/redux-store";
 
 
-function App (props: AppPropsType) {
+function App () {
     return (
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friendsBar={props.store.getState().sidebar.friends}/>
+                <Navbar friendsBar={store.getState().sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile store={props.store}/>}/>
-                    <Route path="/dialogues" render={() => <DialoguesContainer store={props.store} />}/>
+                    <Route path="/profile" render={() => <Profile />}/>
+                    <Route path="/dialogues" render={() => <DialoguesContainer />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
