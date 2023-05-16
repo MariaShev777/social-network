@@ -1,5 +1,8 @@
-import {ProfilePageType} from "./store";
-
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 let initialState = {
     posts: [
@@ -7,9 +10,11 @@ let initialState = {
         {id: 2, message: "It's my first post", likesCount: 21},
         {id: 3, message: "WoW", likesCount: 25},
         {id: 4, message: "See ya", likesCount: 29}
-    ],
+    ] as PostType[],
     newPostText: "chto-to"
 };
+
+export type ProfilePageType = typeof initialState
 
 export type ProfilePageActionsType = AddPostActionCreatorType | UpdateNewPostTextActionCreatorType;
 

@@ -1,12 +1,12 @@
-import sharik from './imgs/sharik.jpg'
-import richi from './imgs/richi.jpg'
- import musya from './imgs/musya.jpg'
+// import sharik from './imgs/sharik.jpg'
+// import richi from './imgs/richi.jpg'
+//  import musya from './imgs/musya.jpg'
 import profileReducer, {ProfilePageActionsType} from "./profileReducer";
 import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
 import sidebarReducer from "./sidebarReducer";
 
 
-export type ActionsType = ProfilePageActionsType | DialoguesPageActionsType;
+// export type ActionsType = ProfilePageActionsType | DialoguesPageActionsType;
 
 export type MessageType = {
     id: number

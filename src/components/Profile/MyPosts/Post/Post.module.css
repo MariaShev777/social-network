@@ -4,7 +4,7 @@
 
 .item img {
     width: 80px;
-    border-radius: 30px;
+    border-radius: 50%;
 }
 .item .likes {
     color: red;

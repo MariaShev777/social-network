@@ -1,7 +1,15 @@
-import {DialoguesPageType} from "./store";
+export type DialogueType = {
+    id: number
+    name: string
+}
+
+export type MessageType = {
+    id: number
+    message: string
+}
 
 
-let initialState = {
+let initialState = { // тут помечать не надо типизацию
     dialogues: [
         {id: 1, name: "Barsik"},
         {id: 2, name: "Richi"},
@@ -9,20 +17,24 @@ let initialState = {
         {id: 4, name: "Sharik"},
         {id: 5, name: "Lessi"},
         {id: 6, name: "Kubik"}
-    ],
+    ] as DialogueType[],
     messages: [
         {id: 1, message: "Meeooww"},
         {id: 2, message: "Wanna play?"},
         {id: 3, message: "I would eat all day looooong"},
         {id: 4, message: "Prr-r-rrr"},
         {id: 5, message: "Prr-r-rrr"}
-    ],
+    ] as MessageType[],
     newMessageText: ""
 };
 
+export type DialoguesPageType = typeof initialState
+
+
+
 export type DialoguesPageActionsType = UpdateNewMessageTextCreatorType | SendMessageCreatorType;
 
-const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType) => {
+const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType): DialoguesPageType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
             return {
