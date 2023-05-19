@@ -8,15 +8,15 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {DialoguesContainer} from "./components/Dialogues/DialoguesContainer";
-import store from "./redux/redux-store";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import store from "./redux/redux-store";
 
 
 function App () {
     return (
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friendsBar={store.getState().sidebar.friends}/>
+                <Navbar friends={store.getState().sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile />}/>
                     <Route path="/dialogues" render={() => <DialoguesContainer />}/>
