@@ -1,7 +1,9 @@
 
-export type UsersActionsType = followACType
-    | unfollowACType
-    | setUsersACType;
+export type UsersActionsType = FollowACType
+    | UnfollowACType
+    | SetUsersACType
+    | SetCurrentPageACType
+    | SetUsersTotalCountACType;
 
 
 export type UserType = {
@@ -22,10 +24,16 @@ export type UserType = {
 
 export type UsersPageType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: UsersPageType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 };
 
 const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType): UsersPageType => {
@@ -46,7 +54,18 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersActionsT
             case 'SET-USERS': {
                 return {
                     ...state,
-                    users: [...state.users, ...action.payload.users]
+                    users: [...action.payload.users]
+                }
+            }
+            case 'SET-CURRENT-PAGE': {
+                return {
+                    ...state,
+                    currentPage: action.payload.currentPage
+                }
+            }case 'SET-TOTAL-USERS-COUNT': {
+                return {
+                    ...state,
+                    totalUsersCount: action.payload.totalCount
                 }
             }
             default:
@@ -55,9 +74,11 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersActionsT
     }
 
 
-type followACType = ReturnType<typeof followAC>
-type unfollowACType = ReturnType<typeof unfollowAC>
-type setUsersACType = ReturnType<typeof setUsersAC>
+type FollowACType = ReturnType<typeof followAC>
+type UnfollowACType = ReturnType<typeof unfollowAC>
+type SetUsersACType = ReturnType<typeof setUsersAC>
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type SetUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
 
 
 export const followAC = (userId: number) => {
@@ -84,6 +105,24 @@ export const setUsersAC = (users: UserType[]) => {
         type: 'SET-USERS',
         payload: {
             users
+        }
+    } as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        payload: {
+            currentPage
+        }
+    } as const
+}
+
+export const setUsersTotalCountAC = (totalCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT',
+        payload: {
+            totalCount
         }
     } as const
 }
