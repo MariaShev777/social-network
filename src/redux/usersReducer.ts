@@ -3,7 +3,8 @@ export type UsersActionsType = FollowACType
     | UnfollowACType
     | SetUsersACType
     | SetCurrentPageACType
-    | SetUsersTotalCountACType;
+    | SetUsersTotalCountACType
+    | ToggleFetchingACType;
 
 
 export type UserType = {
@@ -27,13 +28,15 @@ export type UsersPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 let initialState: UsersPageType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 
 const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType): UsersPageType => {
@@ -62,10 +65,17 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersActionsT
                     ...state,
                     currentPage: action.payload.currentPage
                 }
-            }case 'SET-TOTAL-USERS-COUNT': {
+            }
+            case 'SET-TOTAL-USERS-COUNT': {
                 return {
                     ...state,
                     totalUsersCount: action.payload.totalCount
+                }
+            }
+            case 'TOGGLE-FETCHING': {
+                return {
+                    ...state,
+                    isFetching: action.payload.isFetching
                 }
             }
             default:
@@ -79,6 +89,8 @@ type UnfollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type SetUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
+type ToggleFetchingACType = ReturnType<typeof toggleFetchingAC>
+
 
 
 export const followAC = (userId: number) => {
@@ -123,6 +135,15 @@ export const setUsersTotalCountAC = (totalCount: number) => {
         type: 'SET-TOTAL-USERS-COUNT',
         payload: {
             totalCount
+        }
+    } as const
+}
+
+export const toggleFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE-FETCHING',
+        payload: {
+            isFetching
         }
     } as const
 }

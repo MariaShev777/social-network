@@ -28,7 +28,7 @@ export const Users = (props: UsersPropsType) => {
 
 
     return <div>
-        <div style={{padding: "7px", display: "flex", justifyContent: "center"}}>
+        <div className={s.pages}>
             {pages.map((p, index) => {
 
                 return <span key={index} className={props.currentPage === p ? s.selectedPage : ""}
