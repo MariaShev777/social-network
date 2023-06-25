@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Users} from "./Users";
-import preloader from '../../assets/images/preloader.svg';
 
 import {
     follow,
@@ -11,7 +10,6 @@ import {
     UserType
 } from "../../redux/usersReducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import axios from "axios";
 import {Preloader} from "../Common/Preloader/Preloader";
 
