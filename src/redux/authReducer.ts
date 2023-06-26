@@ -20,7 +20,6 @@ const authReducer = (state = initialState, action: AuthActionsType): AuthType =>
 
         switch (action.type) {
             case 'SET-USER-DATA': {
-                debugger
                 return {
                     ...state,
                     ...action.data,
