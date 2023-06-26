@@ -2,15 +2,21 @@ import {combineReducers, createStore} from "redux";
 import profileReducer, {ProfilePageActionsType} from "./profileReducer";
 import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
 import sidebarReducer from "./sidebarReducer";
-import usersReducer from "./usersReducer";
+import usersReducer, {UsersActionsType} from "./usersReducer";
+import authReducer, {AuthActionsType} from "./authReducer";
 
-export type ActionsType = ProfilePageActionsType | DialoguesPageActionsType;
+export type ActionsType =
+    | ProfilePageActionsType
+    | DialoguesPageActionsType
+    | UsersActionsType
+    | AuthActionsType;
 
 export const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialoguesPage: dialoguesReducer, //+
     sidebar: sidebarReducer, //+
-    usersPage: usersReducer //+
+    usersPage: usersReducer, //+
+    auth: authReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>
