@@ -5,12 +5,11 @@ import {Users} from "./Users";
 import {
     follow,
     setCurrentPage, setTotalUsersCount,
-    setUsers, toggleFetching,
+    setUsers, toggleFetching, toggleFollowingProgress,
     unfollow,
     UserType
 } from "../../redux/usersReducer";
 import {AppStateType} from "../../redux/redux-store";
-import axios from "axios";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
 
@@ -46,7 +45,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    onPageChanged={this.onPageChanged}
                    users={this.props.users}
                    unfollow={this.props.unfollow}
-                   follow={this.props.follow}/>
+                   follow={this.props.follow}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}/>
         </>
     }
 }
@@ -57,6 +58,7 @@ type MapStatePropsType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 
 type MapDispatchPropsType = {
@@ -66,6 +68,8 @@ type MapDispatchPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+
 }
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
@@ -76,7 +80,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -113,5 +118,6 @@ export default connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleFetching
+    toggleFetching,
+    toggleFollowingProgress
 }) (UsersContainer)
