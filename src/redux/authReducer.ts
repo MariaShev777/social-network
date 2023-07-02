@@ -49,7 +49,6 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
         .then(res => {
             if (res.data.resultCode === 0) {
                 let {id, email, login} = res.data.data
-                // this.props.toggleFetching(false);
                 dispatch(setAuthUserDataAC(id, email, login));
             }
         })

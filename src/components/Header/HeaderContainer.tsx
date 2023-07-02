@@ -9,7 +9,6 @@ import {getAuthUserDataTC} from "../../redux/authReducer";
 class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
-        // this.props.toggleFetching(true)
         this.props.getAuthUserDataTC()
     }
 
