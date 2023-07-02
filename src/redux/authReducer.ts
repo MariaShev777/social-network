@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type AuthActionsType = SetAuthUserDataACType
 
@@ -39,6 +41,18 @@ export const setAuthUserDataAC = (id: number, email: string, login: string) => {
         type: "SET-USER-DATA",
         data: {id, email, login}
     } as const
+}
+
+
+export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
+    authAPI.logIn()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                let {id, email, login} = res.data.data
+                // this.props.toggleFetching(false);
+                dispatch(setAuthUserDataAC(id, email, login));
+            }
+        })
 }
 
 

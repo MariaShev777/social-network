@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+
 export type PostType = {
     id: number
     message: string
@@ -39,7 +42,7 @@ export type ProfilePageType = typeof initialState
 export type ProfilePageActionsType =
     | AddPostActionCreatorType
     | UpdateNewPostTextActionCreatorType
-    | setUserProfileActionType;
+    | SetUserProfileActionType;
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType):ProfilePageType => {
     switch (action.type) {
@@ -84,13 +87,22 @@ export const updateNewPostTextActionCreator = (text: string) => {
     } as const
 }
 
-export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: any) => {
     return {
         type: 'SET_USER_PROFILE',
         profile
     } as const
 }
+
+
+export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then((response) => {
+            dispatch(setUserProfile(response.data));
+        })
+}
+
 
 
 export default profileReducer;

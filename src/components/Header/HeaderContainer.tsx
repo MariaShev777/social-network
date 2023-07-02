@@ -2,8 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {setAuthUserDataAC} from "../../redux/authReducer";
-import {usersAPI} from "../../api/api";
+import {getAuthUserDataTC} from "../../redux/authReducer";
 
 
 
@@ -11,14 +10,7 @@ class HeaderContainer extends React.Component<HeaderPropsType> {
 
     componentDidMount() {
         // this.props.toggleFetching(true)
-        usersAPI.logIn()
-            .then(res => {
-                if (res.data.resultCode === 0) {
-                    let {id, email, login} = res.data.data
-                    // this.props.toggleFetching(false);
-                    this.props.setAuthUserDataAC(id, email, login);
-                }
-            })
+        this.props.getAuthUserDataTC()
     }
 
     render() {
@@ -38,8 +30,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchPropsType = {
-    setAuthUserDataAC: (id: number, email: string, login: string) => void
-    // toggleFetching: (isFetching: boolean) => void
+    getAuthUserDataTC: () => void
 }
 
 
@@ -51,4 +42,4 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 
-export default connect(mapStateToProps, {setAuthUserDataAC}) (HeaderContainer);
+export default connect(mapStateToProps, {getAuthUserDataTC}) (HeaderContainer);
