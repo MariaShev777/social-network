@@ -2,11 +2,14 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../Common/Preloader/Preloader";
 import store from "../../../redux/redux-store";
+import {ProfileStatus} from "./ProfileStatus";
 
 //
 // export type ProfileInfoType = {
 //     profile: {  }
 // }
+
+
 
 const ProfileInfo = () => {
 
@@ -25,7 +28,7 @@ const ProfileInfo = () => {
             <div className={s.descriptionBlock}>
                 <img src={store.getState().profilePage.profile.photos.large} />
                 <img src="https://i.redd.it/oz628d4ene331.jpg" width="100px"/>
-                <div><i>Hi, kitties! It's Nacho here ;)</i></div>
+                <ProfileStatus status={'HHHH'}/>
             </div>
         </div>
 
