@@ -1,20 +1,21 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../Common/Preloader/Preloader";
-import store from "../../../redux/redux-store";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileType} from "../../../redux/profileReducer";
+import userPhoto from '../../../assets/images/noname.png'
 
-//
-// export type ProfileInfoType = {
-//     profile: {  }
-// }
+export type ProfileInfoType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
+}
 
 
 
-const ProfileInfo = () => {
-
-    if (!store.getState().profilePage.profile) {
-        return <Preloader />
+const ProfileInfo = (props: ProfileInfoType) => {
+    if (!props.profile) {
+        return <Preloader/>
     }
 
 
@@ -26,13 +27,13 @@ const ProfileInfo = () => {
                     width="900px" height="300px"/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={store.getState().profilePage.profile.photos.large} />
-                <img src="https://i.redd.it/oz628d4ene331.jpg" width="100px"/>
-                <ProfileStatus status={'HHHH'}/>
+                <img src={props.profile.photos.large || userPhoto} width='170px'/>
+                {/*<img src="https://i.redd.it/oz628d4ene331.jpg" width="100px"/>*/}
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 
     )
-};
+}
 
 export default ProfileInfo;
