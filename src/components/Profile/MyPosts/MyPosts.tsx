@@ -2,18 +2,14 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {PostType} from "../../../redux/profileReducer";
-
-
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type MyPostsPropsType = {
     posts: PostType[]
-    newPostText: string
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    // newPostText: string
+    addPost: (ewPostText: string) => void
+    // updateNewPostText: (text: string) => void
 }
-
-
-
 
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -22,33 +18,39 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let onAddPost = () => {
-        props.addPost();
+    let onAddPost = (values: AddNewPostFormDataType) => {
+        props.addPost(values.newPostText);
     }
 
-    let onPostChange = () => {
-        let text = newPostElement.current?.value;
-        if (text) {
-            props.updateNewPostText(text);
-        }
-    }
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
     )
 }
+
+type AddNewPostFormDataType = {
+    newPostText: string
+}
+
+let AddNewPostForm:React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name='newPostText' component='textarea'/>
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+}
+
+const AddNewPostFormRedux = reduxForm<AddNewPostFormDataType>({form: 'profileAddNewPostForm'})(AddNewPostForm)
 
 export default MyPosts;

@@ -24,28 +24,21 @@ let initialState = { // тут помечать не надо типизацию
         {id: 3, message: "I would eat all day looooong"},
         {id: 4, message: "Prr-r-rrr"},
         {id: 5, message: "Prr-r-rrr"}
-    ] as MessageType[],
-    newMessageText: ""
+    ] as MessageType[]
 };
 
 export type DialoguesPageType = typeof initialState
 
 
 
-export type DialoguesPageActionsType = UpdateNewMessageTextCreatorType | SendMessageCreatorType;
+export type DialoguesPageActionsType = SendMessageCreatorType;
 
 const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType): DialoguesPageType => {
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-TEXT":
-            return {
-                ...state,
-                newMessageText: action.newMsgText
-            };
         case "SEND-MESSAGE":
-            let newMsgText = state.newMessageText;
+            let newMsgText = action.newMessage;
             return {
                 ...state,
-                newMessageText: "",
                 messages: [...state.messages, {id: 6, message: newMsgText}]
             };
 
@@ -54,17 +47,9 @@ const dialoguesReducer = (state: DialoguesPageType = initialState, action: Dialo
     }
 }
 
-type UpdateNewMessageTextCreatorType = ReturnType<typeof updateNewMessageTextCreator>
 
 type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
 
-export const updateNewMessageTextCreator = (text: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newMsgText: text
-    } as const
-}
-
-export const sendMessageCreator = () => ({type: "SEND-MESSAGE"} as const)
+export const sendMessageCreator = (newMessage: string) => ({type: "SEND-MESSAGE", newMessage} as const)
 
 export default dialoguesReducer;

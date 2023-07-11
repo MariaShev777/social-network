@@ -21,7 +21,6 @@ export type ProfileType = {
 
 export type ProfilePageType = {
     posts: PostType[]
-    newPostText: string
     profile: ProfileType
     status: string
 }
@@ -33,7 +32,6 @@ let initialState: ProfilePageType = {
         {id: 3, message: "WoW", likesCount: 25},
         {id: 4, message: "See ya", likesCount: 29}
     ],
-    newPostText: "chto-to",
     profile: {
         userId: '',
         fullName: '',
@@ -49,7 +47,6 @@ let initialState: ProfilePageType = {
 
 export type ProfilePageActionsType =
     | AddPostActionCreatorType
-    | UpdateNewPostTextActionCreatorType
     | SetUserProfileActionType
     | SetStatusActionType;
 
@@ -58,20 +55,12 @@ const profileReducer = (state = initialState, action: ProfilePageActionsType):Pr
         case "ADD-POST": {
             const newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ""
-            };
-        }
-
-        case "UPDATE-NEW-POST-TEXT": {
-            return {
-                ...state,
-                newPostText: action.newText
+                posts: [...state.posts, newPost]
             };
         }
 
@@ -89,16 +78,8 @@ const profileReducer = (state = initialState, action: ProfilePageActionsType):Pr
 }
 export type AddPostActionCreatorType = ReturnType<typeof addPostActionCreator>
 
-export type UpdateNewPostTextActionCreatorType = ReturnType<typeof updateNewPostTextActionCreator>
+export const addPostActionCreator = (newPostText: string) => ({type: "ADD-POST", newPostText} as const);
 
-export const addPostActionCreator = () => ({type: "ADD-POST"} as const);
-
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: text
-    } as const
-}
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export const setUserProfile = (profile: any) => {
