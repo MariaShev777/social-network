@@ -4,6 +4,7 @@ import Post from "./Post/Post";
 import {PostType} from "../../../redux/profileReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {TextArea} from "../../Common/FormsControls/FormsControls";
 
 type MyPostsPropsType = {
     posts: PostType[]
@@ -45,7 +46,7 @@ let AddNewPostForm:React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props)
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name='newPostText' component='textarea' validate={[required, maxLength10]}/>
+                <Field name='newPostText' component={TextArea} placeholder='Post message' validate={[required, maxLength10]}/>
             </div>
             <div>
                 <button>Add post</button>
