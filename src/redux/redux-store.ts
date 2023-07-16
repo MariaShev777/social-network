@@ -4,7 +4,7 @@ import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReducer, {UsersActionsType} from "./usersReducer";
 import authReducer, {AuthActionsType} from "./authReducer";
-import thunk from "redux-thunk";
+import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form';
 
 export type ActionsType =
@@ -24,6 +24,8 @@ export const rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>
 let store = createStore(rootReducer, applyMiddleware(thunk));
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>
+
 
 //@ts-ignore
 window.store = store;

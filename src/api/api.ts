@@ -16,9 +16,6 @@ export const usersAPI = {
     },
     unfollowUsers (userId: number) {
         return instance.delete(`follow/${userId}`)
-    },
-    getProfile (userId: string) {
-        return instance.get(`profile/${userId}`)
     }
 }
 
@@ -37,10 +34,13 @@ export const profileAPI = {
 
 export const authAPI = {
     logInMe () {
-        return instance.get('auth/me')
+        return instance.get('auth/me');
     },
-    logIn (email: string, password: string) {
-        return instance.post(`/auth/login`, {email, password})
+    logIn (email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`/auth/login`, {email, password, rememberMe});
+    },
+    logOut () {
+        return instance.delete(`/auth/login`);
     }
 }
 
