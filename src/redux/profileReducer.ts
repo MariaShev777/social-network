@@ -14,7 +14,7 @@ export type PhotoType = {
 
 
 export type ProfileType = {
-    userId: string
+    userId: number
     fullName: string
     photos: PhotoType
 }
@@ -33,7 +33,7 @@ let initialState: ProfilePageType = {
         {id: 4, message: "See ya", likesCount: 29}
     ],
     profile: {
-        userId: '',
+        userId: 0,
         fullName: '',
         photos: {
             small: '',
@@ -99,7 +99,7 @@ export const setStatus = (status: string) => {
 
 
 
-export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId)
         .then((response) => {
             dispatch(setUserProfile(response.data));
@@ -107,7 +107,7 @@ export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
 }
 
 
-export const getStatusTC = (userId: string) => (dispatch: Dispatch) => {
+export const getStatusTC = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId)
         .then((response) => {
             dispatch(setStatus(response.data));
