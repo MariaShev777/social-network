@@ -40,8 +40,13 @@ export const initialisedSuccessfullyAC = () => {
 
 
 export const initialiseAppTC = () => (dispatch: ThunkDispatch<AppStateType, unknown, AppActionsType | FormAction>) => {
-    let dispatchResult = dispatch(getAuthUserDataTC());
-    dispatch(initialisedSuccessfullyAC());
+    let promise = dispatch(getAuthUserDataTC());
+
+    promise.then(() => {
+        dispatch(initialisedSuccessfullyAC);
+    })
+
+
 }
 
 export default appReducer;

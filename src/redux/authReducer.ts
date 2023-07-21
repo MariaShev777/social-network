@@ -47,8 +47,8 @@ export const setAuthUserDataAC = (id: number, email: string , login: string , is
 }
 
 
-export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.logInMe()
+export const getAuthUserDataTC = () => (dispatch: ThunkDispatch<AppStateType, unknown, AuthActionsType | FormAction>) => {
+    return authAPI.logInMe()
         .then(res => {
             if (res.data.resultCode === 0) {
                 let {id, email, login} = res.data.data

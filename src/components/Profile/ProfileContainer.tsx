@@ -35,7 +35,13 @@ function ProfileContainer (props: PropsType) {
         let userId = +props.match.params.userId;
         if (!userId) {
             userId = props.authorisedUserId;
+            if (!userId) {
+                props.history.push('/login')
+            }
         }
+
+
+
         props.getUserProfileTC(userId)
         props.getStatusTC(userId)
     }, [])
@@ -58,7 +64,7 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC}),
     withRouter,
     withAuthRedirect
-)(ProfileContainer)
+)(ProfileContainer) as React.ComponentClass
 
 
 
