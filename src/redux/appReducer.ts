@@ -43,7 +43,7 @@ export const initialiseAppTC = () => (dispatch: ThunkDispatch<AppStateType, unkn
     let promise = dispatch(getAuthUserDataTC());
 
     promise.then(() => {
-        dispatch(initialisedSuccessfullyAC);
+        dispatch(initialisedSuccessfullyAC());
     })
 
 
