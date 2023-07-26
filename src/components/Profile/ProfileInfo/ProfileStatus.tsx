@@ -1,6 +1,3 @@
-import store from "../../../redux/redux-store";
-import {Preloader} from "../../Common/Preloader/Preloader";
-import s from "./ProfileInfo.module.css";
 import React, {ChangeEvent} from "react";
 
 
