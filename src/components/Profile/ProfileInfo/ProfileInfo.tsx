@@ -4,6 +4,7 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../redux/profileReducer";
 import userPhoto from '../../../assets/images/noname.png'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import {ProfileStatus} from "./ProfileStatus";
 
 export type ProfileInfoType = {
     profile: ProfileType

@@ -9,7 +9,6 @@ export type PropsType = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
-    // updateStatus: (status: string) => void
 }
 
 
