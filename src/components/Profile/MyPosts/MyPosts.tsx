@@ -13,10 +13,14 @@ type MyPostsPropsType = {
     // updateNewPostText: (text: string) => void
 }
 
+// shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
+//     return nextProps !== this.props || nextState !== this.state;
+// } // это для просто Component, а не PureComponent
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
 
-    let postsElement = props.posts.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount} id={p.id}/> )
+    let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}
+                                                  id={p.id}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
@@ -34,7 +38,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 type AddNewPostFormDataType = {
     newPostText: string
