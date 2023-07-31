@@ -17,6 +17,7 @@ type MyPostsPropsType = {
 //     return nextProps !== this.props || nextState !== this.state;
 // } // это для просто Component, а не PureComponent
 
+
 const MyPosts = React.memo((props: MyPostsPropsType) => {
 
     let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}
