@@ -8,9 +8,7 @@ import {TextArea} from "../../Common/FormsControls/FormsControls";
 
 type MyPostsPropsType = {
     posts: PostType[]
-    // newPostText: string
     addPost: (ewPostText: string) => void
-    // updateNewPostText: (text: string) => void
 }
 
 // shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {

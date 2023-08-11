@@ -18,7 +18,7 @@ let initialState = {
 const appReducer = (state = initialState, action: AppActionsType): AppType => {
 
         switch (action.type) {
-            case 'INITIALISED-SUCCESSFULLY': {
+            case 'app/INITIALISED-SUCCESSFULLY': {
                 return {
                     ...state,
                     initialised: true
@@ -34,7 +34,7 @@ export type InitialisedSuccessfullyACType = ReturnType<typeof initialisedSuccess
 
 export const initialisedSuccessfullyAC = () => {
     return {
-        type: "INITIALISED-SUCCESSFULLY"
+        type: 'app/INITIALISED-SUCCESSFULLY'
     } as const
 }
 

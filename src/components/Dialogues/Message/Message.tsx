@@ -2,7 +2,6 @@ import React from "react";
 import s from "./../Dialogues.module.css";
 
 
-
 type MessageType = {
     message: string
     id: number

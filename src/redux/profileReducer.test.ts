@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, deletePostActionCreator, ProfilePageType} from "./profileReducer";
+import profileReducer, {addPostActionCreator, deletePostActionCreator} from "./profileReducer";
 
 let state = {
     posts: [

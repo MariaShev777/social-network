@@ -13,9 +13,6 @@ const Dialogues = (props: DialoguesPropsType) => {
     let dialoguesElements = state.dialogues.map(d => <DialogueItem name={d.name} key={d.id} id={d.id}/>)
     let messagesElements = state.messages.map(m => <Message message={m.message} id={m.id}/>)
 
-    // let newMessage = state.newMessageText;
-
-
     let addNewMessage = (values: AddFormDataType) => {
         props.sendMessage(values.newMessage);
     }
@@ -31,7 +28,6 @@ const Dialogues = (props: DialoguesPropsType) => {
         </div>
 )
 }
-
 
 
 

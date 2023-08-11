@@ -1,9 +1,23 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL:'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true
 })
+
+enum ResultCodes {
+    Success = 0,
+    Error = 1,
+    CaptchaIsRequired = 10,
+}
+
+
+export type ResponseType<T = {}> = {
+    data: T
+    fieldsErrors: string[]
+    messages: string[]
+    resultCode: ResultCodes
+}
 
 
 export const usersAPI = {
@@ -12,10 +26,10 @@ export const usersAPI = {
             .then(response => response.data)
     },
     followUsers (userId: number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post<AxiosResponse<ResponseType>>(`follow/${userId}`)
     },
     unfollowUsers (userId: number) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete<AxiosResponse<ResponseType>>(`follow/${userId}`)
     }
 }
 

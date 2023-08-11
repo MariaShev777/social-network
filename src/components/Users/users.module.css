@@ -3,19 +3,3 @@
     height: 100px;
 }
 
-.pages {
-    display: flex;
-    justify-content: center;
-    color: white;
-    gap: 7px;
-    font-size: 17px;
-    padding-top: 10px;
-    cursor: pointer;
-}
-
-.selectedPage {
-    font-weight: bold;
-    font-size: 19px;
-    color: lightslategrey;
-    text-decoration: underline white 5px;
-}

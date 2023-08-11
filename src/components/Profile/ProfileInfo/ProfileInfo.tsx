@@ -4,7 +4,6 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileType} from "../../../redux/profileReducer";
 import userPhoto from '../../../assets/images/noname.png'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import {ProfileStatus} from "./ProfileStatus";
 
 export type ProfileInfoType = {
     profile: ProfileType
@@ -14,8 +13,8 @@ export type ProfileInfoType = {
 
 
 
-const ProfileInfo = (props: ProfileInfoType) => {
-    if (!props.profile) {
+const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
 
@@ -28,9 +27,8 @@ const ProfileInfo = (props: ProfileInfoType) => {
                     width="900px" height="300px"/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto} width='170px'/>
-                {/*<img src="https://i.redd.it/oz628d4ene331.jpg" width="100px"/>*/}
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile.photos.large || userPhoto} width='170px'/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
-import profileReducer, {ProfilePageActionsType} from "./profileReducer";
-import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
+import {ProfilePageActionsType} from "./profileReducer";
+import {DialoguesPageActionsType} from "./dialoguesReducer";
 
 
 export type ActionsType = ProfilePageActionsType | DialoguesPageActionsType;
