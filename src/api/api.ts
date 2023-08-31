@@ -2,7 +2,10 @@ import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL:'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+        "API-KEY": "0bcedaa4-1f0f-4539-8da0-be2bd092c459"
+    }
 })
 
 enum ResultCodes {
