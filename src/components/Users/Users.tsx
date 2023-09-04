@@ -23,8 +23,9 @@ export const Users = (props: UsersPropsType) => {
 
     return <div>
         <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                    totalUsersCount={props.totalUsersCount}
-                    pageSize={props.pageSize}/>
+                    totalItemsCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
+        />
         <div>
             {props.users.map(u => <User key={u.id} user={u}
                                         followingInProgress={props.followingInProgress}
