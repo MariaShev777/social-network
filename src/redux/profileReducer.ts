@@ -48,7 +48,8 @@ export type ProfilePageActionsType =
     | AddPostActionCreatorType
     | SetUserProfileActionType
     | SetStatusActionType
-    | DeletePostActionType;
+    | DeletePostActionType
+    | SetUserProfilePhotoAT;
 
 const profileReducer = (state = initialState, action: ProfilePageActionsType):ProfilePageType => {
     switch (action.type) {
@@ -73,6 +74,9 @@ const profileReducer = (state = initialState, action: ProfilePageActionsType):Pr
         }
         case 'profile/DELETE_POST': {
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+        }
+        case 'profile/SET_USER_PROFILE_PHOTO': {
+            return {...state, profile: {...state.profile, photos: action.photos}}
         }
 
         default:
@@ -108,6 +112,13 @@ export const deletePostActionCreator = (postId: number) => {
     } as const
 }
 
+export type SetUserProfilePhotoAT = ReturnType<typeof setUserProfilePhotoAC>
+export const setUserProfilePhotoAC = (photos: PhotoType) => {
+    return {
+        type: 'profile/SET_USER_PROFILE_PHOTO',
+        photos
+    } as const
+}
 
 export const getUserProfileTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getProfile(userId);
@@ -127,6 +138,14 @@ export const updateStatusTC = (status: string) => async (dispatch: Dispatch) => 
         dispatch(setStatus(status));
     }
 }
+
+export const savePhotoTC = (photo: PhotoType) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.savePhoto(photo);
+    if (response.data.resultCode === 0) {
+        dispatch(setUserProfilePhotoAC(response.data.data.photos));
+    }
+}
+
 
 
 export default profileReducer;

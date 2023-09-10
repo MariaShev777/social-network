@@ -10,4 +10,5 @@
 
 .descriptionBlock img {
     border-radius: 12px;
+    max-width: 170px;
 }
