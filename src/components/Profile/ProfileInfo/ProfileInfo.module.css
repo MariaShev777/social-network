@@ -1,11 +1,9 @@
-.wallpaper img{
-    border-radius: 20px;
-    padding: 10px;
-}
-
 
 .descriptionBlock {
     padding: 10px;
+    display: flex;
+    position: relative;
+
 }
 
 .descriptionBlock img {
@@ -16,3 +14,20 @@
 input[type="file"] {
     display: none;
 }
+
+.avaAndButtonBlock {
+    align-content: space-around;
+}
+
+.statusAndNameBlock {
+    position: absolute;
+    margin-left: 180px;
+}
+
+
+.button {
+    margin-left: 10px;
+    margin-top: 137px;
+    position: absolute;
+}
+

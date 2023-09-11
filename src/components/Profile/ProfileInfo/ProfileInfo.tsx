@@ -27,25 +27,22 @@ const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, i
     }
 
     return (
-        <div>
-            <div className={s.wallpaper}>
-                <img
-                    src="https://thumbs.dreamstime.com/b/cat-seamless-pattern-kitten-vector-calico-neko-breed-yarn-ball-character-cartoon-pet-tile-background-repeat-wallpaper-animal-242401729.jpg"
-                    width="900px" height="300px"/>
-            </div>
             <div className={s.descriptionBlock}>
-                <img src={profile.photos.large || userPhoto}/>
-                {isOwner &&
-                    <label className={'button'}>
-                        <input type={'file'} onChange={mainPhotoSelected}/>
-                        Upload a photo
-                    </label>
+                <div className={s.avaAndButtonBlock}>
+                    <img src={profile.photos.large || userPhoto}/>
+                    {isOwner &&
+                        <label className={`button` + ' ' + s.button}>
+                            <input type={'file'} onChange={mainPhotoSelected}/>
+                            Upload a photo
+                        </label>
+                    }
+                </div>
+                    <div className={s.statusAndNameBlock}>
+                        Status: <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                        <span>Name: {profile.fullName}</span>
+                    </div>
 
-                   }
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-            </div>
-        </div>
-
+                </div>
     )
 }
 
