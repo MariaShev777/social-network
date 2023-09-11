@@ -1,4 +1,4 @@
-import React, {ReactComponentElement} from "react";
+import React, {ChangeEvent, ReactComponentElement} from "react";
 import styles from './FormsControls.module.css'
 import {Field} from "redux-form";
 
@@ -18,6 +18,7 @@ const FormControl = ({input, meta: {touched, error}, children}: any) => {
 
 export const TextArea = (props: any) => {
     const {input, meta, ...restProps} = props;
+
 
     return (
         <FormControl {...props}>

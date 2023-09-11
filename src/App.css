@@ -2,6 +2,7 @@
     margin: 0 auto;
     display: grid;
     width: 1200px;
+    /*gap: 20px;*/
     grid-template-areas:
   "h h"
   "n c";
@@ -13,6 +14,42 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: #faa9c2;
+    background-color: #f5f4f4;
     border-radius: 20px;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #28D42D;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.underConstruction {
+    color: red;
+    font-size: 30px;
+    margin: 20px;
+}
+
+.generalInput {
+    border: 1px solid #28D42D;
+    width: 200px;
+    resize: none;
+    border-radius: 5px;
+}
+
+.generalInput[type='text']:hover {
+    /*background-color: #eeecec;*/
+    box-shadow: 0 1px 5px #c2c2c2;
+}
+
+
+.generalInput[type='text']:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: rgb(243, 253, 243);
+    border: 1px solid #28D42D;
 }

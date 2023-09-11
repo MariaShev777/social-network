@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
+import {LikedIcon} from "../../../../assets/icons/LikedIcon";
+import {NotLikedIcon} from "../../../../assets/icons/NotLikedIcon";
 
 
 type PostType = {
@@ -16,7 +18,11 @@ const Post = (props: PostType) => {
             <img src="https://www.surfertoday.com/images/stories/surfingdog.jpg"/>
             {props.message}
             <div className={s.likes}>
-                <span>like</span> {props.likesCount}
+                <span>
+                    <LikedIcon />
+                    <NotLikedIcon />
+                    {props.likesCount}
+                </span>
             </div>
         </div>
     )

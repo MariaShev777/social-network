@@ -2,8 +2,8 @@ import React from 'react';
 
 const Settings = () => {
     return (
-        <div>
-            Settings
+        <div className={'underConstruction'}>
+            Settings's page is under construction
         </div>
     )
 }

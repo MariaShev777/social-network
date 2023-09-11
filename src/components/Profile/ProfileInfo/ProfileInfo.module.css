@@ -12,3 +12,7 @@
     border-radius: 12px;
     max-width: 170px;
 }
+
+input[type="file"] {
+    display: none;
+}

@@ -16,7 +16,7 @@ const AddMessageForm: React.FC<InjectedFormProps<AddFormDataType>> = (props) => 
                 <Field component={TextArea} validate={[required, maxLength50]} name='newMessage' placeholder="Enter a message"/>
             </div>
             <div>
-                <button>SEND</button>
+                <button className={'button'}>SEND</button>
             </div>
         </form>
     )

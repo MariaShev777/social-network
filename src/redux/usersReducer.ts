@@ -22,6 +22,9 @@ export type UserType = {
     name: string
     status: string
     uniqueUrlName: string
+    contacts: {
+        github: string
+    }
 }
 
 export type UsersPageType = {

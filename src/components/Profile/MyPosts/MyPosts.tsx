@@ -1,4 +1,4 @@
-import React from "react";
+import React, {KeyboardEvent} from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {PostType} from "../../../redux/profileReducer";
@@ -8,7 +8,7 @@ import {TextArea} from "../../Common/FormsControls/FormsControls";
 
 type MyPostsPropsType = {
     posts: PostType[]
-    addPost: (ewPostText: string) => void
+    addPost: (newPostText: string) => void
 }
 
 // shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
@@ -23,7 +23,7 @@ const MyPosts = React.memo((props: MyPostsPropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let onAddPost = (values: AddNewPostFormDataType) => {
+    const onAddPost = (values: AddNewPostFormDataType) => {
         props.addPost(values.newPostText);
     }
 
@@ -43,21 +43,27 @@ type AddNewPostFormDataType = {
     newPostText: string
 }
 
+
 const maxLength10 = maxLengthCreator(10);
 
-let AddNewPostForm:React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
+let AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
+
+
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name='newPostText' component={TextArea} placeholder='Post message' validate={[required, maxLength10]}/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
+        <div className={s.addPostBlock}>
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    <Field className={"generalInput"} type={"text"} name="newPostText" component={TextArea}
+                           placeholder="Post message" validate={[required, maxLength10]}/>
+                </div>
+                <div>
+                    <button className={"button"}>Add post</button>
+                </div>
+            </form>
+        </div>
     )
 }
 
-const AddNewPostFormRedux = reduxForm<AddNewPostFormDataType>({form: 'profileAddNewPostForm'})(AddNewPostForm)
+const AddNewPostFormRedux = reduxForm<AddNewPostFormDataType>({form: "profileAddNewPostForm"})(AddNewPostForm)
 
 export default MyPosts;

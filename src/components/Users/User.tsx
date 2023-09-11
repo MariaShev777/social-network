@@ -15,8 +15,8 @@ type UserPropsType = {
 
 export const User = (props: UserPropsType) => {
 
-    return <div>
-            <span>
+    return <div className={s.userContainer}>
+            <div className={s.avaAndButton}>
                 <div>
                     <NavLink to={"/profile/" + props.user.id}>
                      <img src={props.user.photos.small !== null ? props.user.photos.small : userPhoto} className={s.userPhoto}/>
@@ -27,11 +27,11 @@ export const User = (props: UserPropsType) => {
                         ? <button disabled={props.followingInProgress.some(id => id === props.user.id)} onClick={() => {
                             props.unfollowUsersThunkCreator(props.user.id)
                         }}>UnFOLLOW</button>
-                        : <button disabled={props.followingInProgress.some(id => id === props.user.id)} onClick={() => {
+                        : <button className={'button'} disabled={props.followingInProgress.some(id => id === props.user.id)} onClick={() => {
                             props.followUsersThunkCreator(props.user.id)
                         }}>FOLLOW</button>}
                 </div>
-            </span>
+            </div>
             <span>
                <span>
                    <div>{props.user.name}</div>

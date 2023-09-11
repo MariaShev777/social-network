@@ -35,7 +35,13 @@ const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, i
             </div>
             <div className={s.descriptionBlock}>
                 <img src={profile.photos.large || userPhoto}/>
-                {isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
+                {isOwner &&
+                    <label className={'button'}>
+                        <input type={'file'} onChange={mainPhotoSelected}/>
+                        Upload a photo
+                    </label>
+
+                   }
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>

@@ -32,8 +32,9 @@ const Navbar = (props: NavbarPropsType) => {
             <div className={s.friendsBar}>FRIENDS</div>
             <div className={s.friends}>{props.friends.map(el => {
                 return (
-                    <div key={el.id} className={s.friend}><img src={el.ava}/>
-                        <div>{el.friendName}</div>
+                    <div key={el.id} className={s.friend}>
+                        <img src={el.ava}/>
+                        <span>{el.friendName}</span>
                     </div>
                 )
             })}

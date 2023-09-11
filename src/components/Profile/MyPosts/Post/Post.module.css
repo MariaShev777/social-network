@@ -1,5 +1,6 @@
 .item {
     color: navy;
+    padding: 10px 0;
 }
 
 .item img {
@@ -9,3 +10,5 @@
 .item .likes {
     color: red;
 }
+
+
