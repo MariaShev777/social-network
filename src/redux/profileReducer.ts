@@ -139,8 +139,8 @@ export const updateStatusTC = (status: string) => async (dispatch: Dispatch) => 
     }
 }
 
-export const savePhotoTC = (photo: PhotoType) => async (dispatch: Dispatch) => {
-    let response = await profileAPI.savePhoto(photo);
+export const uploadPhotoTC = (photo: string | Blob) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.uploadPhoto(photo);
     if (response.data.resultCode === 0) {
         dispatch(setUserProfilePhotoAC(response.data.data.photos));
     }

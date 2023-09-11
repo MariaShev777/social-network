@@ -39,12 +39,12 @@ class App extends React.Component<AppPropsType> {
                 <div className="app-wrapper-content">
                     <Redirect from='/' to='/profile'/>
                     <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
+
                     <Route path="/dialogues" render={withSuspense(DialoguesContainer)}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
-
-                    <Route path="/users" render={() => <UsersContainer/>}/>
 
                     <Route path="/login" render={() => <Login/>}/>
                     {/*<Route path={'*'} render={() => <div>404 NOT FOUND</div>}/>*/}

@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {PhotoType, ProfileType} from "../../redux/profileReducer";
+import {ProfileType} from "../../redux/profileReducer";
 
 
 
@@ -10,7 +10,7 @@ export type PropsType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: (photo: PhotoType) => void
+    uploadPhoto: (photo: string | Blob) => void
 }
 
 
@@ -21,7 +21,7 @@ const Profile = (props: PropsType) => {
                          profile={props.profile}
                          status={props.status}
                          updateStatus={props.updateStatus}
-                         savePhoto={props.savePhoto}/>
+                         uploadPhoto={props.uploadPhoto}/>
             <MyPostsContainer />
         </div>
     )

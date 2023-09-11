@@ -10,19 +10,19 @@ export type ProfileInfoType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: (photo: PhotoType) => void
+    uploadPhoto: (photo: string | Blob) => void
 }
 
 
 
-const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, uploadPhoto}) => {
     if (!profile) {
         return <Preloader/>
     }
 
     const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
-            savePhoto(e.target.files[0])
+            uploadPhoto(e.target.files[0])
         }
     }
 

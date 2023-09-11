@@ -4,10 +4,8 @@ import {connect} from "react-redux";
 import {
     getStatusTC,
     getUserProfileTC,
-    PhotoType,
     ProfileType,
-    savePhotoTC,
-    updateStatusTC
+    updateStatusTC, uploadPhotoTC
 } from "../../redux/profileReducer";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -30,7 +28,7 @@ type MapDispatchToPropsType = {
     getUserProfileTC: (userId: number) => void
     getStatusTC: (userId: number) => void
     updateStatusTC: (status: string) => void
-    savePhotoTC: (photo: PhotoType) => void
+    uploadPhotoTC: (photo: string | Blob) => void
 }
 
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -58,7 +56,7 @@ function ProfileContainer(props: PropsType) {
                  profile={props.profile}
                  status={props.status}
                  updateStatus={props.updateStatusTC}
-                 savePhoto={props.savePhotoTC}/>
+                 uploadPhoto={props.uploadPhotoTC}/>
     )
 
 }
@@ -71,7 +69,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC, savePhotoTC}),
+    connect(mapStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC, uploadPhotoTC}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer) as React.ComponentClass
