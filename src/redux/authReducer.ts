@@ -12,13 +12,15 @@ type AuthType = {
     email: string
     login: string
     isAuth: boolean
+    photo: string
 }
 
 let initialState = {
     id: 0,
     email: '',
     login: '',
-    isAuth: false
+    isAuth: false,
+    photo: ''
 };
 
 const authReducer = (state = initialState, action: AuthActionsType): AuthType => {

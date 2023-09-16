@@ -22,10 +22,6 @@ type UsersPropsType = {
 export const Users = (props: UsersPropsType) => {
 
     return <div>
-        <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                    totalItemsCount={props.totalUsersCount}
-                    pageSize={props.pageSize}
-        />
         <div>
             {props.users.map(u => <User key={u.id} user={u}
                                         followingInProgress={props.followingInProgress}
@@ -33,6 +29,10 @@ export const Users = (props: UsersPropsType) => {
                                         unfollowUsersThunkCreator={props.unfollowUsersThunkCreator}/>)
             }
         </div>
+        <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
+                    totalItemsCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
+        />
     </div>
 }
 

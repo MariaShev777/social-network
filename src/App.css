@@ -49,7 +49,9 @@
 
 .generalInput[type='text']:focus {
     outline: none;
-    box-shadow: none;
-    background-color: rgb(243, 253, 243);
+    /*box-shadow: none;*/
+    /*background-color: rgb(243, 253, 243);*/
+    box-shadow: inset 0 1px 5px #c2c2c2;
     border: 1px solid #28D42D;
 }
+

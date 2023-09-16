@@ -1,9 +1,11 @@
-import React, {ChangeEvent} from "react";
-import s from './ProfileInfo.module.css';
+import React, {ChangeEvent, useState} from "react";
+import s from "./ProfileInfo.module.css";
 import {Preloader} from "../../Common/Preloader/Preloader";
-import {PhotoType, ProfileType} from "../../../redux/profileReducer";
-import userPhoto from '../../../assets/images/noname.png'
+import {ProfileType} from "../../../redux/profileReducer";
+import userPhoto from "../../../assets/images/noname.png"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm, {ProfileFormDataType} from "./ProfileDataForm";
+
 
 export type ProfileInfoType = {
     profile: ProfileType
@@ -11,11 +13,13 @@ export type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     uploadPhoto: (photo: string | Blob) => void
+    saveProfile: (formData: ProfileFormDataType) => void
 }
 
 
+const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, uploadPhoto, saveProfile}) => {
+    let [editMode, setEditMode] = useState<boolean>(false);
 
-const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, isOwner, uploadPhoto}) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -26,24 +30,81 @@ const ProfileInfo:React.FC<ProfileInfoType> = ({profile, status, updateStatus, i
         }
     }
 
-    return (
-            <div className={s.descriptionBlock}>
-                <div className={s.avaAndButtonBlock}>
-                    <img src={profile.photos.large || userPhoto}/>
-                    {isOwner &&
-                        <label className={`button` + ' ' + s.button}>
-                            <input type={'file'} onChange={mainPhotoSelected}/>
-                            Upload a photo
-                        </label>
-                    }
-                </div>
-                    <div className={s.statusAndNameBlock}>
-                        Status: <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                        <span>Name: {profile.fullName}</span>
-                    </div>
+    const onSubmit = (formData: ProfileFormDataType) => {
+        saveProfile(formData);
+        setEditMode(false);
+    }
 
-                </div>
+    return (
+        <div className={s.descriptionBlock}>
+            <div className={s.avaAndButtonBlock}>
+                <img src={profile.photos.large || userPhoto}/>
+                {isOwner &&
+                    <label className={`button` + " " + s.button}>
+                        <input type={"file"} onChange={mainPhotoSelected}/>
+                        Upload a photo
+                    </label>
+                }
+
+            </div>
+            <div className={s.statusAndNameBlock}>
+                {editMode
+                    ? <ProfileDataForm onSubmit={onSubmit} />
+                    : <ProfileData profile={profile} isOwner={isOwner} triggerEditMode={() => setEditMode(true)}/>}
+
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+            </div>
+        </div>
+
     )
+}
+
+type ProfileDataType = {
+    profile: ProfileType
+    isOwner: boolean
+    triggerEditMode: () => void
+}
+
+const ProfileData = ({profile, isOwner, triggerEditMode}: ProfileDataType) => {
+    return (
+        <>
+            {isOwner && <div><button onClick={triggerEditMode}>Edit</button></div>}
+            <div className={s.statusAndNameBlock}>
+                <div><b>Name:</b> {profile.fullName}</div>
+                <div>
+                    <b>About me:</b> {profile.aboutMe}
+                </div>
+                <div>
+                    <b>Looking for a job:</b> {profile.lookingForAJob ? "yes" : "no"}
+                </div>
+                <div>
+                    <b>My professional skills:</b> {profile.lookingForAJobDescription}
+                </div>
+
+            </div>
+
+            <div className={s.contactsBlock}>
+                <div><b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
+                    return <Contact
+                        key={key}
+                        title={key}
+                        value={profile.contacts[key as "github" & "facebook"]}/>
+                })}
+                </div>
+            </div>
+        </>
+    )
+}
+
+
+
+type ContactPropsType = {
+    title: string
+    value: string
+}
+
+export const Contact = ({title, value}: ContactPropsType) => {
+    return <div style={{fontWeight: '400'}}>{title}: {value}</div>
 }
 
 export default ProfileInfo;

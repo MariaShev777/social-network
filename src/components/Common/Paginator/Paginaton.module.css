@@ -25,10 +25,10 @@
 
 .pagination button {
     width: 75px;
-    color: #28D42D;
+    color: white;
     border-radius: 15px;
     border: none;
-    background-color: white;
+    background-color: rgba(49, 51, 53, 0.73);
     font-weight: bold;
     padding-top: 5px;
     cursor: pointer;

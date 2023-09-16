@@ -9,7 +9,14 @@ let state = {
     ],
     profile: {
         userId: 0,
+        aboutMe: '',
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
         fullName: '',
+        contacts: {
+            github: '',
+            facebook: ''
+        },
         photos: {
             small: '',
             large: ''

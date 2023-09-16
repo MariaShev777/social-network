@@ -32,7 +32,7 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
-        login: state.auth.login
+        login: state.auth.login,
     }
 }
 

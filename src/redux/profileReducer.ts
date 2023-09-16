@@ -1,5 +1,11 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {ThunkDispatch} from "redux-thunk";
+import {AppStateType, AppThunk} from "./redux-store";
+import {FormAction} from "redux-form";
+import {AuthActionsType} from "./authReducer";
+import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import Profile from "../components/Profile/Profile";
 
 export type PostType = {
     id: number
@@ -12,10 +18,19 @@ export type PhotoType = {
     large: string
 }
 
+export type ContactsType = {
+    github: string
+    facebook: string
+}
+
 
 export type ProfileType = {
     userId: number
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
     fullName: string
+    contacts: ContactsType
     photos: PhotoType
 }
 
@@ -34,7 +49,14 @@ let initialState: ProfilePageType = {
     ],
     profile: {
         userId: 0,
+        aboutMe: '',
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
         fullName: '',
+        contacts: {
+            github: '',
+            facebook: ''
+        },
         photos: {
             small: '',
             large: ''
@@ -49,7 +71,8 @@ export type ProfilePageActionsType =
     | SetUserProfileActionType
     | SetStatusActionType
     | DeletePostActionType
-    | SetUserProfilePhotoAT;
+    | SetUserProfilePhotoAT
+    | SetUpdatedUserProfileAT;
 
 const profileReducer = (state = initialState, action: ProfilePageActionsType):ProfilePageType => {
     switch (action.type) {
@@ -77,6 +100,9 @@ const profileReducer = (state = initialState, action: ProfilePageActionsType):Pr
         }
         case 'profile/SET_USER_PROFILE_PHOTO': {
             return {...state, profile: {...state.profile, photos: action.photos}}
+        }
+        case 'profile/SET_UPDATED_USER_PROFILE': {
+            return {...state, profile: {...state.profile, ...action.profile}}
         }
 
         default:
@@ -125,6 +151,16 @@ export const getUserProfileTC = (userId: number) => async (dispatch: Dispatch) =
     dispatch(setUserProfile(response.data));
 }
 
+export type SetUpdatedUserProfileAT = ReturnType<typeof setUpdatedUserProfileAC>
+export const setUpdatedUserProfileAC = (profile: ProfileFormDataType) => {
+    return {
+        type: 'profile/SET_UPDATED_USER_PROFILE',
+        profile
+    } as const
+}
+
+
+
 
 export const getStatusTC = (userId: number) => async (dispatch: Dispatch) => {
     let response = await profileAPI.getStatus(userId);
@@ -146,6 +182,13 @@ export const uploadPhotoTC = (photo: string | Blob) => async (dispatch: Dispatch
     }
 }
 
+
+export const saveProfileTC = (profile: ProfileFormDataType):AppThunk => async (dispatch) => {
+    let response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+        dispatch(setUpdatedUserProfileAC(profile));
+    }
+}
 
 
 export default profileReducer;
