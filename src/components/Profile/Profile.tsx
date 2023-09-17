@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileInfo, {ProfileInfoType} from "./ProfileInfo/ProfileInfo";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/profileReducer";
 import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
@@ -12,7 +12,7 @@ export type PropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     uploadPhoto: (photo: string | Blob) => void
-    saveProfile: (profile: ProfileFormDataType) => void
+    saveProfile: (profile: ProfileFormDataType) => Promise<any>
 }
 
 

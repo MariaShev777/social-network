@@ -30,7 +30,7 @@ type MapDispatchToPropsType = {
     getStatusTC: (userId: number) => void
     updateStatusTC: (status: string) => void
     uploadPhotoTC: (photo: string | Blob) => void
-    saveProfileTC: (profile: ProfileFormDataType) => void
+    saveProfileTC: (profile: ProfileFormDataType) => Promise<any>
 }
 
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType

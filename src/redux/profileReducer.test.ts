@@ -14,8 +14,14 @@ let state = {
         lookingForAJobDescription: '',
         fullName: '',
         contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
             github: '',
-            facebook: ''
+            mainLink: ''
         },
         photos: {
             small: '',

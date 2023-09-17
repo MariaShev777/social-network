@@ -13,7 +13,7 @@ export type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     uploadPhoto: (photo: string | Blob) => void
-    saveProfile: (formData: ProfileFormDataType) => void
+    saveProfile: (formData: ProfileFormDataType) => Promise<any>
 }
 
 
@@ -31,8 +31,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, 
     }
 
     const onSubmit = (formData: ProfileFormDataType) => {
-        saveProfile(formData);
-        setEditMode(false);
+       saveProfile(formData).then(() => {
+               setEditMode(false);
+           })
     }
 
     return (
@@ -49,7 +50,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatus, 
             </div>
             <div className={s.statusAndNameBlock}>
                 {editMode
-                    ? <ProfileDataForm onSubmit={onSubmit} />
+                    ? <ProfileDataForm profile={profile} initialValues={profile} onSubmit={onSubmit} />
                     : <ProfileData profile={profile} isOwner={isOwner} triggerEditMode={() => setEditMode(true)}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
@@ -104,7 +105,9 @@ type ContactPropsType = {
 }
 
 export const Contact = ({title, value}: ContactPropsType) => {
-    return <div style={{fontWeight: '400'}}>{title}: {value}</div>
+    return <div style={{fontWeight: '400'}}>
+        <b>{title}:</b> {value}
+    </div>
 }
 
 export default ProfileInfo;
