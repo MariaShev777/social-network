@@ -23,6 +23,9 @@ export type ResponseType<T = {}> = {
     resultCode: ResultCodes
 }
 
+type GetCaptchaUrlType = {
+    url: string
+}
 
 export const usersAPI = {
     getUsers (currentPage: number = 1, pageSize: number = 10) {
@@ -66,13 +69,21 @@ export const authAPI = {
     logInMe () {
         return instance.get('auth/me');
     },
-    logIn (email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`/auth/login`, {email, password, rememberMe});
+    logIn (email: string, password: string, rememberMe: boolean = false, captcha: string = '') {
+        return instance.post(`/auth/login`, {email, password, rememberMe, captcha});
     },
     logOut () {
         return instance.delete(`/auth/login`);
     }
 }
+
+
+export const securityAPI = {
+    getCaptchaUrl () {
+        return instance.get<GetCaptchaUrlType>('security/get-captcha-url');
+    }
+}
+
 
 
 
