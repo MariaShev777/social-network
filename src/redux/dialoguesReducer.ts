@@ -9,7 +9,7 @@ export type MessageType = {
 }
 
 
-let initialState = { // тут помечать не надо типизацию
+let initialState = {
     dialogues: [
         {id: 1, name: "Barsik"},
         {id: 2, name: "Richi"},
@@ -28,10 +28,8 @@ let initialState = { // тут помечать не надо типизацию
 };
 
 export type DialoguesPageType = typeof initialState
+export type DialoguesPageActionsType = ReturnType<typeof sendMessageCreator>;
 
-
-
-export type DialoguesPageActionsType = SendMessageCreatorType;
 
 const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType): DialoguesPageType => {
     switch (action.type) {
@@ -47,8 +45,6 @@ const dialoguesReducer = (state: DialoguesPageType = initialState, action: Dialo
     }
 }
 
-
-type SendMessageCreatorType = ReturnType<typeof sendMessageCreator>
 
 export const sendMessageCreator = (newMessage: string) => ({type: 'dialogues/SEND-MESSAGE', newMessage} as const)
 

@@ -22,10 +22,19 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 
 class App extends React.Component<AppPropsType> {
 
+    catchAllUnhandledErrors = (reason, promise) => {
+        alert('Some error');
+       // console.error(promiseRejectionEvent)
+}
+
     componentDidMount() {
-        this.props.initialiseAppTC()
+        this.props.initialiseAppTC();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
 
     render() {
         if (!this.props.initialised) {
@@ -41,7 +50,7 @@ class App extends React.Component<AppPropsType> {
                     <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
 
                     <Route path="/dialogues" render={withSuspense(DialoguesContainer)}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
+                    <Route path="/users" render={() => <UsersContainer />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

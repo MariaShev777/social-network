@@ -1,25 +1,25 @@
 import React from "react";
-import { UserType} from "../../redux/usersReducer";
 import {Pagination} from "../Common/Paginator/Pagination";
 import {User} from "./User";
+import {UserType} from "../../types/types";
 
 
 
-type UsersPropsType = {
+type Props = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     users: UserType[]
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    // follow: (userId: number) => void
+    // unfollow: (userId: number) => void
     followingInProgress: number[]
     unfollowUsersThunkCreator: (userId: number) => void
     followUsersThunkCreator: (userId: number) => void
 }
 
 
-export const Users = (props: UsersPropsType) => {
+export const Users = (props: Props) => {
 
     return <div>
         <div>
