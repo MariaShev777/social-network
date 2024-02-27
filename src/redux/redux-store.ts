@@ -1,19 +1,13 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import profileReducer, {ProfilePageActionsType} from "./profileReducer";
-import dialoguesReducer, {DialoguesPageActionsType} from "./dialoguesReducer";
+import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
+import profileReducer from "./profileReducer";
+import dialoguesReducer from "./dialoguesReducer";
 import sidebarReducer from "./sidebarReducer";
-import usersReducer, {UsersActionsType} from "./usersReducer";
-import authReducer, {AuthActionsType} from "./authReducer";
+import usersReducer from "./usersReducer";
+import authReducer from "./authReducer";
 import thunk, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from 'redux-form';
-import appReducer, {AppActionsType} from "./appReducer";
+import appReducer from "./appReducer";
 
-export type ActionsType =
-    | ProfilePageActionsType
-    | DialoguesPageActionsType
-    | UsersActionsType
-    | AuthActionsType
-    | AppActionsType;
 
 export const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -39,7 +33,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>
+export type AppThunk<A extends Action, R = void> = ThunkAction<R, AppStateType, unknown, A>
 
 
 //@ts-ignore

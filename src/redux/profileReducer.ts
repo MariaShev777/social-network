@@ -1,8 +1,9 @@
-import {profileAPI} from "../api/api";
 import {AppThunk} from "./redux-store";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
 import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 import {PhotosType} from "../types/types";
+import {ResultCode} from "../types/enum";
+import {profileAPI} from "../api/profileApi";
 
 export type PostType = {
     id: number
@@ -49,14 +50,14 @@ let initialState: ProfilePageType = {
 };
 
 
-export type ProfilePageActionsType =
+export type ProfilePageActions =
     | AddPostActionCreatorType
     | SetUserProfileActionType
     | SetStatusActionType
     | DeletePostActionType
     | SetUserProfilePhotoAT;
 
-const profileReducer = (state = initialState, action: ProfilePageActionsType): ProfilePageType => {
+const profileReducer = (state = initialState, action: ProfilePageActions): ProfilePageType => {
     switch (action.type) {
         case 'profile/ADD-POST': {
             const newPost = {
@@ -79,7 +80,7 @@ const profileReducer = (state = initialState, action: ProfilePageActionsType): P
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         }
         case 'profile/SET_USER_PROFILE_PHOTO': {
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         }
         default:
             return state
@@ -107,42 +108,44 @@ export type SetUserProfilePhotoAT = ReturnType<typeof setUserProfilePhotoAC>
 export const setUserProfilePhotoAC = (photos: PhotosType) => ({type: 'profile/SET_USER_PROFILE_PHOTO', photos} as const)
 
 
-export const getUserProfileTC = (userId: number | null):AppThunk => async (dispatch) => {
-    let response = await profileAPI.getProfile(userId);
-    dispatch(setUserProfile(response.data));
+export const getUserProfileTC = (userId: number): AppThunk<ProfilePageActions> => async (dispatch) => {
+    let data = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(data));
 }
 
-export const getStatusTC = (userId: number):AppThunk => async (dispatch) => {
-    let response = await profileAPI.getStatus(userId);
-    dispatch(setStatus(response.data));
+export const getStatusTC = (userId: number): AppThunk<ProfilePageActions> => async (dispatch) => {
+    let data = await profileAPI.getStatus(userId);
+    dispatch(setStatus(data));
 }
 
-export const updateStatusTC = (status: string):AppThunk => async (dispatch) => {
+export const updateStatusTC = (status: string): AppThunk<ProfilePageActions> => async (dispatch) => {
     try {
-        let response = await profileAPI.updateStatus(status);
-        if (response.data.resultCode === 0) {
+        let data = await profileAPI.updateStatus(status);
+        if (data.resultCode === ResultCode.Success) {
             dispatch(setStatus(status));
         }
     } catch (error) {
     }
 }
 
-export const uploadPhotoTC = (photo: string | Blob):AppThunk => async (dispatch) => {
-    let response = await profileAPI.uploadPhoto(photo);
-    if (response.data.resultCode === 0) {
-        dispatch(setUserProfilePhotoAC(response.data.data.photos));
+export const uploadPhotoTC = (photo: File): AppThunk<ProfilePageActions> => async (dispatch) => {
+    let data = await profileAPI.uploadPhoto(photo);
+    if (data.resultCode === ResultCode.Success) {
+        dispatch(setUserProfilePhotoAC(data.data.photos));
     }
 }
 
-export const saveProfileTC = (profile: ProfileFormDataType): AppThunk => async (dispatch, getState) => {
+export const saveProfileTC = (profile: ProfileFormDataType): AppThunk<ProfilePageActions | FormAction> => async (dispatch, getState) => {
     const userId = getState().auth.id;
-    const response = await profileAPI.saveProfile(profile);
-    if (response.data.resultCode === 0) {
-        dispatch(getUserProfileTC(userId));
+    const data = await profileAPI.saveProfile(profile);
+    if (data.resultCode === ResultCode.Success) {
+        if (userId !== null) {
+            dispatch(getUserProfileTC(userId));
+        }
     } else {
-        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
+        dispatch(stopSubmit('edit-profile', {_error: data.messages[0]}))
         // dispatch(stopSubmit('edit-profile', {"contacts": {"facebook": response.data.messages[0]} }))
-        return Promise.reject(response.data.messages[0]);
+        return Promise.reject(data.messages[0]);
     }
 }
 

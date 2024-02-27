@@ -1,8 +1,14 @@
-import React, {ChangeEvent, ReactComponentElement} from "react";
+import React from "react";
 import styles from './FormsControls.module.css'
-import {Field} from "redux-form";
+import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
+import {FieldValidator} from "../../../utils/validators/validators";
 
-const FormControl = ({input, meta: {touched, error}, children}: any) => {
+type Props = {
+    meta: WrappedFieldMetaProps
+    children: React.ReactNode
+}
+
+const FormControl = ({meta: {touched, error}, children}: Props) => {
     const hasError = touched && error;
 
     return (
@@ -16,9 +22,8 @@ const FormControl = ({input, meta: {touched, error}, children}: any) => {
 }
 
 
-export const TextArea = (props: any) => {
+export const TextArea = (props: WrappedFieldProps) => {
     const {input, meta, ...restProps} = props;
-
 
     return (
         <FormControl {...props}>
@@ -28,8 +33,7 @@ export const TextArea = (props: any) => {
 }
 
 
-
-export const Input = (props: any) => {
+export const Input = (props: WrappedFieldProps) => {
     const {input, meta, ...restProps} = props;
 
     return (
@@ -39,11 +43,16 @@ export const Input = (props: any) => {
     )
 }
 
-export const createField =
-    (placeholder: string | null, name: string, validators: any[],
-     component: (props: any) => ReactComponentElement<any>, props: any = {}, text: string = '') => (
-    <div>
+
+export function createField<T extends string>(placeholder: string | undefined,
+                               name: T,
+                               validators: FieldValidator[],
+                               component: React.FC<WrappedFieldProps>,
+                               props: any = {},
+                               text = '') {
+    return <div>
         <Field placeholder={placeholder} name={name}
                validate={validators} component={component} {...props}/> {text}
     </div>
-)
+}
+
