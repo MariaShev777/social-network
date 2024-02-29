@@ -1,22 +1,19 @@
 import React from "react";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/profileReducer";
-import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-
-
-export type PropsType = {
-    profile: ProfileType
+type Props = {
+    profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    uploadPhoto: (photo: string | Blob) => void
-    saveProfile: (profile: ProfileFormDataType) => Promise<any>
+    uploadPhoto: (photo: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
 }
 
 
-const Profile = (props: PropsType) => {
+const Profile = (props: Props) => {
     return (
         <div>
             <ProfileInfo isOwner={props.isOwner}

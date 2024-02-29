@@ -1,8 +1,7 @@
 import profileReducer, {
     addPostActionCreator,
     deletePostActionCreator,
-    ProfilePageType,
-    ProfileType
+    ProfilePageType
 } from "./profileReducer";
 
 

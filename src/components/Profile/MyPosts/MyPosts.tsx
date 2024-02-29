@@ -2,68 +2,36 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {PostType} from "../../../redux/profileReducer";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {TextArea} from "../../Common/FormsControls/FormsControls";
+import AddPostForm, {AddPostFormData} from "./AddPostForm/AddPostForm";
 
-type MyPostsPropsType = {
+export type MapStateToPropsType = {
     posts: PostType[]
+}
+
+export type MapDispatchToPropsType = {
     addPost: (newPostText: string) => void
 }
 
-// shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
-//     return nextProps !== this.props || nextState !== this.state;
-// } // это для просто Component, а не PureComponent
+type MyPosts = MapStateToPropsType & MapDispatchToPropsType
 
 
-const MyPosts = React.memo((props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPosts) => {
 
-    let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}
-                                                  id={p.id}/>)
+    let postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-    const onAddPost = (values: AddNewPostFormDataType) => {
+    const onAddPost = (values: AddPostFormData) => {
         props.addPost(values.newPostText);
     }
-
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <AddNewPostFormRedux onSubmit={onAddPost}/>
+            <AddPostForm onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
     )
 })
-
-type AddNewPostFormDataType = {
-    newPostText: string
-}
-
-
-const maxLength10 = maxLengthCreator(10);
-
-let AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
-
-
-    return (
-        <div className={s.addPostBlock}>
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field className={"generalInput"} type={"text"} name="newPostText" component={TextArea}
-                           placeholder="Post message" validate={[required, maxLength10]}/>
-                </div>
-                <div>
-                    <button className={"button"}>Add post</button>
-                </div>
-            </form>
-        </div>
-    )
-}
-
-const AddNewPostFormRedux = reduxForm<AddNewPostFormDataType>({form: "profileAddNewPostForm"})(AddNewPostForm)
 
 export default MyPosts;

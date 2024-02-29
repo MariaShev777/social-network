@@ -8,6 +8,5 @@ export const LikedIcon = () => {
                   stroke='dimgrey'
             />
         </svg>
-
     );
 };

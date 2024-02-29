@@ -2,13 +2,12 @@ import React from "react";
 import s from "./../Dialogues.module.css";
 import {NavLink} from "react-router-dom";
 
-
-type DialogueItemType = {
+type Props = {
     name: string
     id: number
 }
 
-const DialogueItem = (props: DialogueItemType) => {
+const DialogueItem = (props: Props) => {
     let path = "/dialogues/" + props.id;
 
     return (
@@ -17,7 +16,5 @@ const DialogueItem = (props: DialogueItemType) => {
         </div>
     )
 }
-
-
 
 export default DialogueItem;

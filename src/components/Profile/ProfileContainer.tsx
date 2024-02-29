@@ -11,44 +11,37 @@ import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
+
 
 type PathParamsType = {
     userId: string;
 }
 
-type MapStateToPropsType = {
-    profile: ProfileType
-    status: string
-    authorisedUserId: number
-    isAuth: boolean
-
-}
-
+type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchToPropsType = {
     getUserProfileTC: (userId: number) => void
     getStatusTC: (userId: number) => void
     updateStatusTC: (status: string) => void
-    uploadPhotoTC: (photo: string | Blob) => void
-    saveProfileTC: (profile: ProfileFormDataType) => Promise<any>
+    uploadPhotoTC: (photo: File) => void
+    saveProfileTC: (profile: ProfileType) => Promise<any>
 }
 
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+type Props = RouteComponentProps<PathParamsType> & OwnPropsType
 
-function ProfileContainer(props: PropsType) {
+function ProfileContainer(props: Props) {
 
     useEffect(() => {
-        let userId = +props.match.params.userId;
+        let userId: number | null = +props.match.params.userId;
         if (!userId) {
             userId = props.authorisedUserId;
             if (!userId) {
                 props.history.push("/login")
             }
         }
-        props.getUserProfileTC(userId)
-        props.getStatusTC(userId)
+        props.getUserProfileTC(userId as number)
+        props.getStatusTC(userId as number)
     }, [props.match.params.userId])
 
 
@@ -64,7 +57,7 @@ function ProfileContainer(props: PropsType) {
 
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorisedUserId: state.auth.id,
@@ -75,7 +68,7 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC, uploadPhotoTC, saveProfileTC}),
     withRouter,
     withAuthRedirect
-)(ProfileContainer) as React.ComponentClass
+)(ProfileContainer)
 
 
 

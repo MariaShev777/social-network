@@ -1,20 +1,19 @@
 import React, {useState} from "react";
 import s from "./Paginaton.module.css"
 
-
 type Props = {
-    currentPage: number
+    currentPage?: number
     totalItemsCount: number
     pageSize: number
-    onPageChanged: (pageNumber: number) => void
+    onPageChanged?: (pageNumber: number) => void
     portionSize?: number
 }
 
 export const Pagination = ({
-                               currentPage,
+                               currentPage = 1,
                                totalItemsCount,
                                pageSize,
-                               onPageChanged,
+                               onPageChanged = x => x,
                                portionSize = 10
                            }: Props) => {
 

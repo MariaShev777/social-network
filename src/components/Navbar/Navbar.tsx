@@ -3,11 +3,11 @@ import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import {FriendsType} from "../../redux/sidebarReducer";
 
-type NavbarPropsType = {
+type Props = {
     friends: FriendsType[]
 }
 
-const Navbar = (props: NavbarPropsType) => {
+const Navbar = (props: Props) => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -39,7 +39,6 @@ const Navbar = (props: NavbarPropsType) => {
                 )
             })}
             </div>
-
         </nav>
     )
 };

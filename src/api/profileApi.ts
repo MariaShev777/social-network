@@ -1,7 +1,7 @@
-import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
-import {instance, ResponseType} from "./api";
 import {ProfileType} from "../redux/profileReducer";
 import {PhotosType} from "../types/types";
+import {instance} from "./api";
+import {CommonResponse} from "./types";
 
 export const profileAPI = {
     getProfile (userId: number) {
@@ -11,18 +11,18 @@ export const profileAPI = {
         return instance.get<string>(`profile/status/${userId}`).then(res => res.data)
     },
     updateStatus (status: string) {
-        return instance.put<ResponseType>(`profile/status`, {status}).then(res => res.data)
+        return instance.put<CommonResponse>(`profile/status`, {status}).then(res => res.data)
     },
     uploadPhoto (photos: File) {
         const formData = new FormData();
         formData.append('image', photos);
-        return instance.put<ResponseType<{photos: PhotosType}>>(`profile/photo`, formData, {
+        return instance.put<CommonResponse<{photos: PhotosType}>>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => res.data)
     },
-    saveProfile (profile: ProfileFormDataType) {
-        return instance.put<ResponseType>(`profile`, profile).then(res => res.data)
+    saveProfile (profile: ProfileType) {
+        return instance.put<CommonResponse>(`profile`, profile).then(res => res.data)
     }
 }

@@ -8,7 +8,7 @@ import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 import styles from '../Common/FormsControls/FormsControls.module.css'
 
-type FormDataKeys = keyof FormDataType
+export type FormDataKeys = keyof FormDataType
 export type FormDataType = {
     email: string
     password: string
@@ -44,8 +44,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
 const LoginReduxForm = reduxForm<FormDataType, LoginFormPropsType>({
     form: 'login'
 })(LoginForm)
-
-
 
 
 

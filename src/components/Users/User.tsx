@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 import {UserType} from "../../types/types";
 
 
-type UserPropsType = {
+type Props = {
     user: UserType
     followingInProgress: number[]
     unfollowUsersThunkCreator: (userId: number) => void
@@ -14,7 +14,7 @@ type UserPropsType = {
 }
 
 
-export const User = (props: UserPropsType) => {
+export const User = (props: Props) => {
 
     return <div className={s.userContainer}>
             <div className={s.avaAndButton}>

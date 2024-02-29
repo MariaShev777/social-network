@@ -34,10 +34,9 @@ export type DialoguesPageActionsType = ReturnType<typeof sendMessageCreator>;
 const dialoguesReducer = (state: DialoguesPageType = initialState, action: DialoguesPageActionsType): DialoguesPageType => {
     switch (action.type) {
         case 'dialogues/SEND-MESSAGE':
-            let newMsgText = action.newMessage;
             return {
                 ...state,
-                messages: [...state.messages, {id: 6, message: newMsgText}]
+                messages: [...state.messages, {id: 6, message: action.newMessage}]
             };
 
         default:

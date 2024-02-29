@@ -1,6 +1,5 @@
-import {AppStateType, AppThunk} from "./redux-store";
+import {AppThunk} from "./redux-store";
 import {FormAction} from "redux-form";
-import {ThunkDispatch} from "redux-thunk";
 import {getAuthUserDataTC} from "./authReducer";
 
 export type AppActionsType = ReturnType<typeof initialisedSuccessfullyAC>

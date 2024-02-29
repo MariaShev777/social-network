@@ -3,17 +3,21 @@ import s from "./Dialogues.module.css";
 import Message from "./Message/Message";
 import DialogueItem from "./DialogueItem/DialogueItem";
 import {DialoguesPropsType} from "./DialoguesContainer";
-import {AddFormDataType, AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
+import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
+
+export type AddFormData = {
+    newMessage: string
+}
 
 const Dialogues = (props: DialoguesPropsType) => {
 
     let state = props.dialoguesPage;
 
     let dialoguesElements = state.dialogues.map(d => <DialogueItem name={d.name} key={d.id} id={d.id}/>)
-    let messagesElements = state.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message}/>)
 
-    let addNewMessage = (values: AddFormDataType) => {
+    let addNewMessage = (values: AddFormData) => {
         props.sendMessage(values.newMessage);
     }
 
@@ -23,7 +27,7 @@ const Dialogues = (props: DialoguesPropsType) => {
             <div className={s.dialoguesItems}>{dialoguesElements}</div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <AddMessageFormRedux onSubmit={addNewMessage}/>
+                <AddMessageForm onSubmit={addNewMessage}/>
             </div>
         </div>
 )

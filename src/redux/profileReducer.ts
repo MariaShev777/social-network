@@ -1,6 +1,5 @@
 import {AppThunk} from "./redux-store";
 import {FormAction, stopSubmit} from "redux-form";
-import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 import {PhotosType} from "../types/types";
 import {ResultCode} from "../types/enum";
 import {profileAPI} from "../api/profileApi";
@@ -135,7 +134,7 @@ export const uploadPhotoTC = (photo: File): AppThunk<ProfilePageActions> => asyn
     }
 }
 
-export const saveProfileTC = (profile: ProfileFormDataType): AppThunk<ProfilePageActions | FormAction> => async (dispatch, getState) => {
+export const saveProfileTC = (profile: ProfileType): AppThunk<ProfilePageActions | FormAction> => async (dispatch, getState) => {
     const userId = getState().auth.id;
     const data = await profileAPI.saveProfile(profile);
     if (data.resultCode === ResultCode.Success) {
