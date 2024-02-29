@@ -1,10 +1,10 @@
 import {AppThunk} from "./redux-store";
 import {FormAction, stopSubmit} from "redux-form";
-import {ResultCode} from "../types/enum";
-import {authAPI} from "../api/authApi";
-import {securityAPI} from "../api/securityApi";
+import {ResultCode} from "types/enum";
+import {authAPI} from "api/authApi";
+import {securityAPI} from "api/securityApi";
 
-export type AuthActionsType = ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof getCaptchaUrlAC>;
+export type AuthActionsType = ReturnType<typeof setAuthUserData> | ReturnType<typeof getCaptchaUrl>;
 
 type AuthType = typeof initialState
 
@@ -30,30 +30,30 @@ const authReducer = (state = initialState, action: AuthActionsType): AuthType =>
     }
 }
 
-export const setAuthUserDataAC = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: "auth/SET-USER-DATA",
         payload: {id, email, login, isAuth}
     } as const
 }
 
-export const getCaptchaUrlAC = (captchaUrl: string) => ({type: "auth/GET-CAPTCHA-URL", payload: {captchaUrl}} as const)
+export const getCaptchaUrl = (captchaUrl: string) => ({type: "auth/GET-CAPTCHA-URL", payload: {captchaUrl}} as const)
 
 
 
-export const getAuthUserDataTC = (): AppThunk<AuthActionsType | FormAction, Promise<any>> => async (dispatch) => {
+export const getAuthUserData = (): AppThunk<AuthActionsType | FormAction, Promise<any>> => async (dispatch) => {
     let response = await authAPI.me();
     if (response.resultCode === ResultCode.Success) {
         let {id, email, login} = response.data
-        dispatch(setAuthUserDataAC(id, email, login, true));
+        dispatch(setAuthUserData(id, email, login, true));
     }
 }
 
-export const logInTC = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk<AuthActionsType | FormAction> =>
+export const logIn = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk<AuthActionsType | FormAction> =>
     async (dispatch) => {
         let response = await authAPI.logIn(email, password, rememberMe, captcha);
         if (response.resultCode === ResultCode.Success) {
-            dispatch(getAuthUserDataTC());
+            dispatch(getAuthUserData());
         } else {
             if (response.resultCode === ResultCode.CaptchaIsRequired) {
                 dispatch(getCaptchaUrlTC())
@@ -66,13 +66,13 @@ export const logInTC = (email: string, password: string, rememberMe: boolean, ca
 export const getCaptchaUrlTC = (): AppThunk<AuthActionsType> => async (dispatch) => {
     const data = await securityAPI.getCaptchaUrl();
     const captcha = data.url;
-    dispatch(getCaptchaUrlAC(captcha));
+    dispatch(getCaptchaUrl(captcha));
 }
 
 export const logOutTC = (): AppThunk<AuthActionsType> => async (dispatch) => {
     let response = await authAPI.logOut()
     if (response.data.resultCode === ResultCode.Success) {
-        dispatch(setAuthUserDataAC(null, null, null, false));
+        dispatch(setAuthUserData(null, null, null, false));
     }
 }
 

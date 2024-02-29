@@ -1,13 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Users} from "./Users";
-
 import {
     followUsersThunkCreator, getUsersThunkCreator,
     unfollowUsersThunkCreator
-} from "../../redux/usersReducer";
-import {AppStateType} from "../../redux/redux-store";
-import {Preloader} from "../Common/Preloader/Preloader";
+} from "redux/usersReducer";
+import {AppStateType} from "redux/redux-store";
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -16,8 +13,10 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers
-} from "../../redux/users-selectors";
-import {UserType} from "../../types/types";
+} from "redux/users-selectors";
+import {UserType} from "types/types";
+import {Users} from './Users';
+import {Preloader} from "components/Common/preloader/Preloader";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {

@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import {Redirect, Route, withRouter} from "react-router-dom";
-import Music from "./components/Music/Music";
-import News from "./components/News/News";
-import Settings from "./components/Settings/Settings";
-import UsersContainer from "./components/Users/UsersContainer";
+import Music from "./components/music/Music";
+import News from "./components/news/News";
+import Settings from "./components/settings/Settings";
+import UsersContainer from "./components/users/UsersContainer";
 import store, {AppStateType} from "./redux/redux-store";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import HeaderContainer from "./components/header/HeaderContainer";
+import Login from "./components/login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Preloader} from "./components/Common/Preloader/Preloader";
-import {initialiseAppTC} from "./redux/appReducer";
+import {Preloader} from "./components/Common/preloader/Preloader";
+import {initialiseApp} from "./redux/appReducer";
 import {withSuspense} from "./hoc/withSuspense";
 
 const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'));
@@ -27,7 +27,7 @@ class App extends React.Component<AppPropsType> {
 }
 
     componentDidMount() {
-        this.props.initialiseAppTC();
+        this.props.initialiseApp();
         window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
@@ -64,7 +64,7 @@ class App extends React.Component<AppPropsType> {
 export type AppPropsType = MapStateToPropsType & MapDispatchPropsType;
 
 type MapDispatchPropsType = {
-    initialiseAppTC: () => void
+    initialiseApp: () => void
 }
 
 type MapStateToPropsType = {
@@ -79,5 +79,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export default compose<React.ComponentType> (
     withRouter,
-    connect(mapStateToProps, {initialiseAppTC})) (App) as React.ComponentClass
+    connect(mapStateToProps, {initialiseApp: initialiseApp})) (App) as React.ComponentClass
 

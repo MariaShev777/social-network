@@ -1,8 +1,8 @@
 import React from 'react';
-import Header, {HeaderProps, MapDispatchPropsType, MapStateToPropsType} from "./Header";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {logOutTC} from "../../redux/authReducer";
+import {AppStateType} from "redux/redux-store";
+import {logOutTC} from "redux/authReducer";
+import Header, {HeaderProps, MapDispatchPropsType, MapStateToPropsType} from "components/header/Header";
 
 
 class HeaderContainer extends React.Component<HeaderProps> {

@@ -1,10 +1,10 @@
 import {Dispatch} from "redux";
 import {AxiosResponse} from "axios";
-import {updateObjectInArray} from "../utils/validators/objectsHelpers";
-import {UserType} from "../types/types";
+import {updateObjectInArray} from "utils/validators/objectsHelpers";
+import {UserType} from "types/types";
 import {AppThunk} from "./redux-store";
-import {ResultCode} from "../types/enum";
-import {usersAPI} from "../api/usersApi";
+import {ResultCode} from "types/enum";
+import {usersAPI} from "api/usersApi";
 
 
 export type UsersActions = FollowACType

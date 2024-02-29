@@ -1,8 +1,8 @@
 import {AppThunk} from "./redux-store";
 import {FormAction} from "redux-form";
-import {getAuthUserDataTC} from "./authReducer";
+import {getAuthUserData} from "./authReducer";
 
-export type AppActionsType = ReturnType<typeof initialisedSuccessfullyAC>
+export type AppActionsType = ReturnType<typeof initialisedSuccessfully>
 
 type AppType = typeof initialState
 
@@ -24,13 +24,13 @@ const appReducer = (state = initialState, action: AppActionsType): AppType => {
 }
 
 
-export const initialisedSuccessfullyAC = () => ({type: 'app/INITIALISED-SUCCESSFULLY'} as const)
+export const initialisedSuccessfully = () => ({type: 'app/INITIALISED-SUCCESSFULLY'} as const)
 
-export const initialiseAppTC = ():AppThunk<AppActionsType | FormAction> => (dispatch) => {
-    let promise = dispatch(getAuthUserDataTC());
+export const initialiseApp = ():AppThunk<AppActionsType | FormAction> => (dispatch) => {
+    let promise = dispatch(getAuthUserData());
 
     promise.then(() => {
-        dispatch(initialisedSuccessfullyAC());
+        dispatch(initialisedSuccessfully());
     })
 }
 

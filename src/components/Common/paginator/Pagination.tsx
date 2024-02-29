@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import s from "./Paginaton.module.css"
+import s from './paginaton.module.css'
 
 type Props = {
     currentPage?: number

@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./../Dialogues.module.css";
+import s from "../dialogues.module.css";
 
 type Props = {
     message: string

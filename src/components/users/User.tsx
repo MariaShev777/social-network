@@ -1,9 +1,8 @@
 import React from "react";
-import userPhoto from '../../assets/images/noname.png';
-
+import userPhoto from 'assets/images/noname.png';
 import s from './users.module.css'
 import {NavLink} from "react-router-dom";
-import {UserType} from "../../types/types";
+import {UserType} from "types/types";
 
 
 type Props = {
@@ -45,4 +44,3 @@ export const User = (props: Props) => {
             </span>
         </div>
 }
-

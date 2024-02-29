@@ -1,8 +1,8 @@
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {maxLengthCreator, required} from "utils/validators/validators";
 import React from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, TextArea} from "../../Common/FormsControls/FormsControls";
 import {AddFormData} from "../Dialogues";
+import {createField, TextArea} from "components/Common/formsControls/FormsControls";
 
 
 type AddFormDataKeys = keyof AddFormData

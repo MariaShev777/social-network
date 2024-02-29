@@ -1,12 +1,12 @@
 import React from 'react';
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, Input} from "../Common/FormsControls/FormsControls";
-import {required} from "../../utils/validators/validators";
+import {createField, Input} from "../Common/formsControls/FormsControls";
+import {required} from "utils/validators/validators";
 import {connect} from "react-redux";
-import {logInTC} from "../../redux/authReducer";
+import {logIn} from "redux/authReducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/redux-store";
-import styles from '../Common/FormsControls/FormsControls.module.css'
+import {AppStateType} from "redux/redux-store";
+import s from 'components/Common/formsControls/formsControls.module.css'
 
 export type FormDataKeys = keyof FormDataType
 export type FormDataType = {
@@ -30,7 +30,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl && createField<FormDataKeys>("Enter symbols from image", "captcha", [required], Input, {}) }
 
-            {error && <div className={styles.formSummaryError}>
+            {error && <div className={s.formSummaryError}>
                 {error}
             </div>}
             <div>
@@ -54,7 +54,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    logInTC: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+    logIn: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 
 let mapStateToProps = (state: AppStateType):MapStateToPropsType => ({
@@ -67,7 +67,7 @@ type Props = MapStateToPropsType & MapDispatchToPropsType
 const Login = (props: Props) => {
 
     const onSubmit = (formData: FormDataType) => {
-        props.logInTC(formData.email, formData.password, formData.rememberMe, formData.captcha)
+        props.logIn(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if (props.isAuth) {
@@ -81,4 +81,4 @@ const Login = (props: Props) => {
     </div>
 }
 
-export default connect(mapStateToProps, {logInTC})(Login);
+export default connect(mapStateToProps, {logIn})(Login);

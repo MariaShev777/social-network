@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./Dialogues.module.css";
+import s from './dialogues.module.css'
 import Message from "./Message/Message";
 import DialogueItem from "./DialogueItem/DialogueItem";
 import {DialoguesPropsType} from "./DialoguesContainer";
@@ -21,7 +21,6 @@ const Dialogues = (props: DialoguesPropsType) => {
         props.sendMessage(values.newMessage);
     }
 
-
     return (
         <div className={s.dialogues}>
             <div className={s.dialoguesItems}>{dialoguesElements}</div>
@@ -30,9 +29,7 @@ const Dialogues = (props: DialoguesPropsType) => {
                 <AddMessageForm onSubmit={addNewMessage}/>
             </div>
         </div>
-)
+    )
 }
-
-
 
 export default Dialogues;

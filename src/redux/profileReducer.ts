@@ -1,8 +1,8 @@
 import {AppThunk} from "./redux-store";
 import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType} from "../types/types";
-import {ResultCode} from "../types/enum";
-import {profileAPI} from "../api/profileApi";
+import {PhotosType} from "types/types";
+import {ResultCode} from "types/enum";
+import {profileAPI} from "api/profileApi";
 
 export type PostType = {
     id: number

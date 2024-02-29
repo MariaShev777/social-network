@@ -6,10 +6,10 @@ import {
     getUserProfileTC,
     ProfileType, saveProfileTC,
     updateStatusTC, uploadPhotoTC
-} from "../../redux/profileReducer";
-import {AppStateType} from "../../redux/redux-store";
+} from "redux/profileReducer";
+import {AppStateType} from "redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {compose} from "redux";
 
 

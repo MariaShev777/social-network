@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
-import {LikedIcon, NotLikedIcon} from "assets/icons";
+import {LikedIcon, NotLikedIcon} from "assets";
+
 
 
 

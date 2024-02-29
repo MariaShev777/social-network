@@ -1,6 +1,5 @@
 import React, {ChangeEvent} from "react";
 
-
 type Props = {
     status: string
     updateStatus: (status: string) => void
@@ -12,12 +11,10 @@ type State = {
 }
 
 export class ProfileStatus extends React.Component<Props, State> {
-
     state = {
         editMode: false,
         status: this.props.status
     }
-
 
     activateEditMode = () => {
         this.setState({
@@ -25,20 +22,17 @@ export class ProfileStatus extends React.Component<Props, State> {
         });
     }
 
-
     onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value
         });
     }
 
-
     deactivateEditMode = () => {
         this.props.updateStatus(this.state.status);
         this.setState({
             editMode: false
         });
-
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
@@ -51,17 +45,17 @@ export class ProfileStatus extends React.Component<Props, State> {
 
 
     render() {
-        console.log('render')
         return (
             <>
                 {!this.state.editMode &&
                     <div>
-                        <span  onDoubleClick={this.activateEditMode}>{this.props.status || 'no status'}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status || 'no status'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onChange={this.onStatusChange} autoFocus onBlur={this.deactivateEditMode} value={this.state.status}/>
+                        <input onChange={this.onStatusChange} autoFocus onBlur={this.deactivateEditMode}
+                               value={this.state.status}/>
                     </div>
                 }
             </>

@@ -1,9 +1,7 @@
 import React from "react";
-import {Pagination} from "../Common/Paginator/Pagination";
-import {User} from "./User";
-import {UserType} from "../../types/types";
-
-
+import {UserType} from "types/types";
+import {User} from './User';
+import {Pagination} from "components/Common/paginator/Pagination";
 
 type Props = {
     totalUsersCount: number
@@ -11,16 +9,12 @@ type Props = {
     currentPage: number
     onPageChanged: (pageNumber: number) => void
     users: UserType[]
-    // follow: (userId: number) => void
-    // unfollow: (userId: number) => void
     followingInProgress: number[]
     unfollowUsersThunkCreator: (userId: number) => void
     followUsersThunkCreator: (userId: number) => void
 }
 
-
 export const Users = (props: Props) => {
-
     return <div>
         <div>
             {props.users.map(u => <User key={u.id} user={u}
@@ -35,4 +29,3 @@ export const Users = (props: Props) => {
         />
     </div>
 }
-

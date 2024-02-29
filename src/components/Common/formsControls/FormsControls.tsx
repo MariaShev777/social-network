@@ -1,7 +1,7 @@
 import React from "react";
-import styles from './FormsControls.module.css'
+import s from './formsControls.module.css'
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
-import {FieldValidator} from "../../../utils/validators/validators";
+import {FieldValidator} from "utils/validators/validators";
 
 type Props = {
     meta: WrappedFieldMetaProps
@@ -12,7 +12,7 @@ const FormControl = ({meta: {touched, error}, children}: Props) => {
     const hasError = touched && error;
 
     return (
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
+        <div className={s.formControl + ' ' + (hasError ? s.error : '')}>
             <div>
                 {children}
             </div>
@@ -55,4 +55,3 @@ export function createField<T extends string>(placeholder: string | undefined,
                validate={validators} component={component} {...props}/> {text}
     </div>
 }
-

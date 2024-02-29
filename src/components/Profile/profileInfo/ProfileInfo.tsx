@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useState} from "react";
-import s from "./ProfileInfo.module.css";
-import {Preloader} from "../../Common/Preloader/Preloader";
-import {ContactsType, ProfileType} from "../../../redux/profileReducer";
-import userPhoto from "../../../assets/images/noname.png"
-import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import s from './profileInfo.module.css'
+import {ContactsType, ProfileType} from "redux/profileReducer";
+import userPhoto from "assets/images/noname.png"
 import ProfileDataForm from "./ProfileDataForm";
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
+import {Preloader} from "components/Common/preloader/Preloader";
 
 type ProfileInfo = {
     profile: ProfileType | null
