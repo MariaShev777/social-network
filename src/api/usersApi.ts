@@ -1,4 +1,3 @@
-import {AxiosResponse} from "axios";
 import {instance} from "./api";
 import {CommonResponse, GetItemsResponse} from "./types";
 
@@ -8,9 +7,9 @@ export const usersAPI = {
             .then(res => res.data)
     },
     followUsers(userId: number) {
-        return instance.post<AxiosResponse<CommonResponse>>(`follow/${userId}`).then(res => res.data)
+        return instance.post<CommonResponse>(`follow/${userId}`).then(res => res.data)
     },
     unfollowUsers(userId: number) {
-        return instance.delete<AxiosResponse<CommonResponse>>(`follow/${userId}`).then(res => res.data)
+        return instance.delete<CommonResponse>(`follow/${userId}`).then(res => res.data)
     }
 }

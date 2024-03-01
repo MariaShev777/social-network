@@ -9,8 +9,8 @@ export type UserType = {
     followed: boolean
     name: string
     status: string
-    uniqueUrlName: string
-    contacts: {
+    uniqueUrlName?: string
+    contacts?: {
         github: string
     }
 }

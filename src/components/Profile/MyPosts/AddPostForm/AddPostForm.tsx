@@ -1,4 +1,4 @@
-import {required} from "../../../../utils/validators/validators";
+import {required} from "utils/validators/validators";
 import React from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import s from "../MyPosts.module.css";

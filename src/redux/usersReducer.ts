@@ -5,6 +5,8 @@ import {UserType} from "types/types";
 import {AppThunk} from "./redux-store";
 import {ResultCode} from "types/enum";
 import {usersAPI} from "api/usersApi";
+import {CommonResponse} from "api/types";
+
 
 
 export type UsersActions = FollowACType
@@ -22,7 +24,7 @@ let initialState = {
     pageSize: 7,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true,
+    isFetching: false,
     followingInProgress: [] as number[]
 };
 
@@ -134,23 +136,20 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppT
 
 
 export const followUsersThunkCreator = (userId: number):AppThunk<UsersActions> => async (dispatch) => {
-    let apiMethod = await usersAPI.followUsers.bind(usersAPI);
-    followUnfollowFlow(dispatch, userId, apiMethod, follow);
+    await followUnfollowFlow(dispatch, userId, usersAPI.followUsers.bind(usersAPI), follow);
 }
 
 
 export const unfollowUsersThunkCreator = (userId: number):AppThunk<UsersActions> => async (dispatch) => {
-    let apiMethod = await usersAPI.unfollowUsers.bind(usersAPI);
-    followUnfollowFlow(dispatch, userId, apiMethod, unfollow);
+    await followUnfollowFlow(dispatch, userId, usersAPI.unfollowUsers.bind(usersAPI), unfollow);
 }
 
 
-const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: (userId: number) => Promise<AxiosResponse<any, any>>,
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: (userId: number) => Promise<CommonResponse>,
                                   actionCreator: (userId: number) => FollowACType | UnfollowACType) => {
     dispatch(toggleFollowingProgress(true, userId))
     let response = await apiMethod(userId);
-    if (response.data.resultCode === ResultCode.Success) {
-
+    if (response.resultCode === ResultCode.Success) {
         dispatch(actionCreator(userId));
     }
     dispatch(toggleFollowingProgress(false, userId));

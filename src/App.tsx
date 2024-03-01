@@ -11,9 +11,9 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Preloader} from "./components/Common/preloader/Preloader";
-import {initialiseApp} from "./redux/appReducer";
-import {withSuspense} from "./hoc/withSuspense";
+import {Preloader} from "components/Common/preloader/Preloader";
+import {initialiseApp} from "redux/appReducer";
+import {withSuspense} from "hoc/withSuspense";
 
 const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));

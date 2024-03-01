@@ -1,5 +1,5 @@
-import {ResultCode} from "../../types/enum";
-import {UserType} from "../../types/types";
+import {ResultCode} from "types/enum";
+import {UserType} from "types/types";
 
 export type CommonResponse<T = {}> = {
     data: T
@@ -19,7 +19,6 @@ export type GetItemsResponse = {
     totalCount: number
     error: string | null
 }
-
 
 export type GetCaptchaUrl = {
     url: string

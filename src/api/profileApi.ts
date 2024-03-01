@@ -1,5 +1,5 @@
-import {ProfileType} from "../redux/profileReducer";
-import {PhotosType} from "../types/types";
+import {ProfileType} from "redux/profileReducer";
+import {PhotosType} from "types/types";
 import {instance} from "./api";
 import {CommonResponse} from "./types";
 

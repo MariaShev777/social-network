@@ -17,15 +17,15 @@ type Props = {
 export const Users = (props: Props) => {
     return <div>
         <div>
+            <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
+                        totalItemsCount={props.totalUsersCount}
+                        pageSize={props.pageSize}
+            />
             {props.users.map(u => <User key={u.id} user={u}
                                         followingInProgress={props.followingInProgress}
                                         followUsersThunkCreator={props.followUsersThunkCreator}
                                         unfollowUsersThunkCreator={props.unfollowUsersThunkCreator}/>)
             }
         </div>
-        <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                    totalItemsCount={props.totalUsersCount}
-                    pageSize={props.pageSize}
-        />
     </div>
 }
