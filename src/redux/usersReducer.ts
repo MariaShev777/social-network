@@ -1,12 +1,10 @@
 import {Dispatch} from "redux";
-import {AxiosResponse} from "axios";
 import {updateObjectInArray} from "utils/validators/objectsHelpers";
 import {UserType} from "types/types";
 import {AppThunk} from "./redux-store";
 import {ResultCode} from "types/enum";
 import {usersAPI} from "api/usersApi";
 import {CommonResponse} from "api/types";
-
 
 
 export type UsersActions = FollowACType
@@ -16,8 +14,10 @@ export type UsersActions = FollowACType
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleFetching>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setFilter>
 
 export type UsersPageType = typeof initialState
+export type FilterType = typeof initialState.filter
 
 let initialState = {
     users: [] as UserType[],
@@ -25,7 +25,11 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [] as number[]
+    followingInProgress: [] as number[],
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 };
 
 const usersReducer = (state: UsersPageType = initialState, action: UsersActions): UsersPageType => {
@@ -76,6 +80,12 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersActions)
                     : state.followingInProgress.filter(id => id !== action.payload.userId)
             }
         }
+        case 'users/SET-FILTER': {
+            return {
+                ...state,
+                filter: action.payload.filter
+            }
+        }
         default:
             return state
     }
@@ -124,23 +134,33 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     } as const
 }
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppThunk<UsersActions> => async (dispatch) => {
+export const setFilter = (filter: FilterType) => {
+    return {
+        type: 'users/SET-FILTER',
+        payload: {
+            filter
+        }
+    } as const
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number, filter: FilterType): AppThunk<UsersActions> => async (dispatch) => {
     dispatch(toggleFetching(true));
     dispatch(setCurrentPage(currentPage));
+    dispatch(setFilter(filter));
 
-    let data = await usersAPI.getUsers(currentPage, pageSize);
+    let data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend);
     dispatch(toggleFetching(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));
 }
 
 
-export const followUsersThunkCreator = (userId: number):AppThunk<UsersActions> => async (dispatch) => {
+export const followUsersThunkCreator = (userId: number): AppThunk<UsersActions> => async (dispatch) => {
     await followUnfollowFlow(dispatch, userId, usersAPI.followUsers.bind(usersAPI), follow);
 }
 
 
-export const unfollowUsersThunkCreator = (userId: number):AppThunk<UsersActions> => async (dispatch) => {
+export const unfollowUsersThunkCreator = (userId: number): AppThunk<UsersActions> => async (dispatch) => {
     await followUnfollowFlow(dispatch, userId, usersAPI.unfollowUsers.bind(usersAPI), unfollow);
 }
 

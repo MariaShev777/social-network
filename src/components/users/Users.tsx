@@ -1,30 +1,61 @@
-import React from "react";
-import {UserType} from "types/types";
+import React, {useEffect} from "react";
 import {User} from './User';
 import {Pagination} from "components/Common/paginator/Pagination";
+import {UsersSearchForm} from "components/users/UsersSearchForm";
+import {FilterType, followUsersThunkCreator, getUsersThunkCreator, unfollowUsersThunkCreator} from "redux/usersReducer";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers,
+    getUsersFilter
+} from "redux/users-selectors";
+import {useDispatch, useSelector} from "react-redux";
 
-type Props = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    users: UserType[]
-    followingInProgress: number[]
-    unfollowUsersThunkCreator: (userId: number) => void
-    followUsersThunkCreator: (userId: number) => void
-}
 
-export const Users = (props: Props) => {
+export const Users = () => {
+    const dispatch = useDispatch()
+
+    const users = useSelector(getUsers)
+    const totalUsersCount = useSelector(getTotalUsersCount)
+    const currentPage = useSelector(getCurrentPage)
+    const pageSize = useSelector(getPageSize)
+    const filter = useSelector(getUsersFilter)
+    const followingInProgress = useSelector(getFollowingInProgress)
+
+    useEffect(() => {
+        dispatch(getUsersThunkCreator(currentPage, pageSize, filter))
+    }, [])
+
+
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(getUsersThunkCreator(pageNumber, pageSize, filter))
+    }
+
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(getUsersThunkCreator(1, pageSize, filter))
+    }
+
+    const follow = (userId: number) => {
+        dispatch(followUsersThunkCreator(userId))
+    }
+
+    const unfollow = (userId: number) => {
+        dispatch(unfollowUsersThunkCreator(userId))
+    }
+
     return <div>
         <div>
-            <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                        totalItemsCount={props.totalUsersCount}
-                        pageSize={props.pageSize}
+            <UsersSearchForm onFilterChanged={onFilterChanged}/>
+            <Pagination currentPage={currentPage} onPageChanged={onPageChanged}
+                        totalItemsCount={totalUsersCount}
+                        pageSize={pageSize}
             />
-            {props.users.map(u => <User key={u.id} user={u}
-                                        followingInProgress={props.followingInProgress}
-                                        followUsersThunkCreator={props.followUsersThunkCreator}
-                                        unfollowUsersThunkCreator={props.unfollowUsersThunkCreator}/>)
+            {users.map(u => <User key={u.id} user={u}
+                                  followingInProgress={followingInProgress}
+                                  followUsersThunkCreator={follow}
+                                  unfollowUsersThunkCreator={unfollow}/>)
             }
         </div>
     </div>
