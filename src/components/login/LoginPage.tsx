@@ -4,7 +4,7 @@ import {createField, Input} from "../Common/formsControls/FormsControls";
 import {required} from "utils/validators/validators";
 import {useDispatch, useSelector} from "react-redux";
 import {logIn} from "redux/authReducer";
-import {Redirect} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {AppStateType} from "redux/redux-store";
 import s from 'components/Common/formsControls/formsControls.module.css'
 
@@ -61,7 +61,7 @@ export const LoginPage = () => {
     }
 
     if (isAuth) {
-        return <Redirect to={'/profile'}/>
+        return <Navigate to={'/profile'}/>
     }
 
     return <div>

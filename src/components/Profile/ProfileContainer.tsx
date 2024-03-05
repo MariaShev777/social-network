@@ -8,13 +8,20 @@ import {
     updateStatusTC, uploadPhotoTC
 } from "redux/profileReducer";
 import {AppStateType} from "redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Location} from 'history';
+
 import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {compose} from "redux";
+import {withRouter} from "utils/withRouter";
+import { NavigateFunction, Params } from "react-router-dom";
 
 
 type PathParamsType = {
-    userId: string;
+    router: {
+        location: Location;
+        navigate: NavigateFunction;
+        params: Params<'userId'>;
+    }
 }
 
 type MapStateToPropsType = ReturnType<typeof mapStateToProps>
@@ -28,26 +35,54 @@ type MapDispatchToPropsType = {
 
 type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-type Props = RouteComponentProps<PathParamsType> & OwnPropsType
+type Props = PathParamsType & OwnPropsType
 
 function ProfileContainer(props: Props) {
 
-    useEffect(() => {
-        let userId: number | null = +props.match.params.userId;
-        if (!userId) {
-            userId = props.authorisedUserId;
-            if (!userId) {
-                props.history.push("/login")
-            }
+    // useEffect(() => {
+    //     let userId: number | null = +props.match.params.userId;
+    //     if (!userId) {
+    //         userId = props.authorisedUserId;
+    //         if (!userId) {
+    //             props.history.push("/login")
+    //         }
+    //     }
+    //     props.getUserProfileTC(userId as number)
+    //     props.getStatusTC(userId as number)
+    // }, [props.match.params.userId])
+
+    const refreshProfile = () => {
+        console.log(props.router)
+        let userID = props.router.params.userId
+
+        if (!userID) userID = props.authorisedUserId?.toString()
+        // if (!userID) {
+        //     this.props.router.location.pathname ="/login"
+        // }
+        //вроде все работает, проверить не показывает ли профиль после logout
+
+        if (!userID) {
+            console.error("ID should exist in URI params or in state")
+        } else {
+            props.getUserProfileTC(Number(userID))
+            props.getStatusTC(Number(userID))
         }
-        props.getUserProfileTC(userId as number)
-        props.getStatusTC(userId as number)
-    }, [props.match.params.userId])
+    }
+
+
+    useEffect(() => {
+        refreshProfile()
+    }, [])
+
+    // useEffect(function (prevProps: Props) {
+    //     if (prevProps.router.params.userId !== props.router.params.userId) refreshProfile()
+    // }, [])
+
 
 
     return (
         <Profile {...props}
-                 isOwner={!props.match.params.userId}
+                 isOwner={!props.router.params.userId}
                  profile={props.profile}
                  status={props.status}
                  updateStatus={props.updateStatusTC}

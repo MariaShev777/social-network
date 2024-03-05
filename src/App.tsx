@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
-import {Redirect, Route, withRouter} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Music from "./components/music/Music";
 import News from "./components/news/News";
 import Settings from "./components/settings/Settings";
@@ -11,20 +11,19 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {Preloader} from "components/Common/preloader/Preloader";
 import {initialiseApp} from "redux/appReducer";
-import {withSuspense} from "hoc/withSuspense";
 import {UsersPage} from "components/users/UsersPage";
 import {LoginPage} from "components/login/LoginPage";
+import {withRouter} from "utils/withRouter";
 
 const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
-
 
 
 class App extends React.Component<AppPropsType> {
 
     catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
         alert('Some error');
-}
+    }
 
     componentDidMount() {
         this.props.initialiseApp();
@@ -45,16 +44,20 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <Navbar friends={store.getState().sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Redirect from='/' to='/profile'/>
-                    <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)}/>
-                    <Route path="/dialogues" render={withSuspense(DialoguesContainer)}/>
-                    <Route path="/users" render={() => <UsersPage />}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/login" render={() => <LoginPage/>}/>
-                    {/*<Route path={'*'} render={() => <div>404 NOT FOUND</div>}/>*/}
-
+                    <Suspense fallback={<Preloader/>}>
+                        <Routes>
+                            <Route path='/' element={<Navigate to="profile"/>}/>
+                            <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
+                            <Route path='profile' element={<ProfileContainer/>}/>
+                            <Route path="/dialogues" element={<DialoguesContainer/>}/>
+                            <Route path="/users" element={<UsersPage/>}/>
+                            <Route path="/news" element={<News/>}/>
+                            <Route path="/music" element={<Music/>}/>
+                            <Route path="/settings" element={<Settings/>}/>
+                            <Route path="/login" element={<LoginPage/>}/>
+                            {/*<Route path={'*'} render={() => <div>404 NOT FOUND</div>}/>*/}
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
         );
@@ -77,7 +80,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default compose<React.ComponentType> (
+export default compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps, {initialiseApp: initialiseApp})) (App) as React.ComponentClass
+    connect(mapStateToProps, {initialiseApp: initialiseApp}))(App) as React.ComponentClass
 
