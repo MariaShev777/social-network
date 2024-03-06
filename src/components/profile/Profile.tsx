@@ -1,7 +1,9 @@
 import React from "react";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "redux/profileReducer";
-import ProfileInfo from "./profileInfo/ProfileInfo";
+import MyPostsContainer from "components/profile/my-posts/MyPostsContainer";
+import ProfileInfo from "components/profile/profileInfo/ProfileInfo";
+import {Button} from "antd";
+
 
 type Props = {
     profile: ProfileType | null
@@ -16,6 +18,7 @@ type Props = {
 const Profile = (props: Props) => {
     return (
         <div>
+            <Button>Default Button</Button>
             <ProfileInfo isOwner={props.isOwner}
                          profile={props.profile}
                          status={props.status}
@@ -23,7 +26,7 @@ const Profile = (props: Props) => {
                          uploadPhoto={props.uploadPhoto}
                          saveProfile={props.saveProfile}
             />
-            <MyPostsContainer />
+            <MyPostsContainer/>
         </div>
     )
 };

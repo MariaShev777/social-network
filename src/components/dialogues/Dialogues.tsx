@@ -1,9 +1,9 @@
 import React from "react";
 import s from './dialogues.module.css'
-import Message from "./Message/Message";
-import DialogueItem from "./DialogueItem/DialogueItem";
-import {DialoguesPropsType} from "./DialoguesContainer";
-import AddMessageForm from "./AddMessageForm/AddMessageForm";
+import DialogueItem from "components/dialogues/dialogue-item/DialogueItem";
+import {DialoguesPropsType} from "components/dialogues/DialoguesContainer";
+import Message from "components/dialogues/message/Message";
+import AddMessageForm from "components/dialogues/add-message-form/AddMessageForm";
 
 
 export type AddFormData = {

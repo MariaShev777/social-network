@@ -1,31 +1,58 @@
 import React from 'react';
-import s from './header.module.css'
-import {NavLink} from "react-router-dom";
+import {Avatar, Button, Col, Layout, Row} from "antd";
+import {UserOutlined} from "@ant-design/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {getIsAuthSelector, getLoginSelector} from "redux/auth-selectors";
+import {logOutTC} from "redux/authReducer";
+import {Link} from "react-router-dom";
 
-export type HeaderProps = MapStateToPropsType & MapDispatchPropsType;
+const {Header} = Layout;
 
-export type MapStateToPropsType = {
-    isAuth: boolean
-    login: string | null
-}
+export const AppHeader = () => {
+        const isAuth = useSelector(getIsAuthSelector)
+        const login = useSelector(getLoginSelector)
 
-export type MapDispatchPropsType = {
-    logOutTC: () => void
-}
+        const dispatch = useDispatch()
 
-const Header = (props: HeaderProps) => {
-    return (
-        <header className={s.header}>
-            <img src="https://raw.githubusercontent.com/infinitered/dogs-n-cats/HEAD/_art/dnc_logo.png"/>
-            <div className={s.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login}
-                        <button className={'button'} onClick={props.logOutTC}>Log out</button>
-                    </div>
-                    : <NavLink to={"/login"}>Login</NavLink>}
-            </div>
-        </header>
-    )
-};
+        const logout = () => {
+            dispatch(logOutTC())
+        }
 
-export default Header;
+        const headerStyle: React.CSSProperties = {
+            // textAlign: 'center',
+            color: '#fff',
+            height: 64,
+            // paddingInline: 48,
+            lineHeight: '64px',
+            backgroundColor: '#4096ff',
+        };
+
+        return (
+            <Header style={headerStyle}>
+                <Row>
+                    <Col span={18}>
+                        <img src={'https://raw.githubusercontent.com/infinitered/dogs-n-cats/HEAD/_art/dnc_logo.png'}
+                             width={72}/>
+                    </Col>
+                    {isAuth
+                        ? <Col span={6}>{login}
+                            <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                            <Button className={'button'} onClick={logout}>Log out</Button>
+                        </Col>
+                        : <Col span={6}> <Button><Link to={"/login"}>Login</Link></Button>
+                        </Col>}
+                </Row>
+            </Header>
+
+// <img src="https://raw.githubusercontent.com/infinitered/dogs-n-cats/HEAD/_art/dnc_logo.png"/>
+// <div className={s.loginBlock}>
+//     {isAuth
+//         ? <div>{login}
+//             <button className={'button'} onClick={logout}>Log out</button>
+//         </div>
+//         : <NavLink to={"/login"}>Login</NavLink>}
+// </div>
+
+        )
+    }
+;

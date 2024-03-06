@@ -1,8 +1,8 @@
 import {required} from "utils/validators/validators";
 import React from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import s from "../MyPosts.module.css";
-import {createField, TextArea} from "../../../Common/formsControls/FormsControls";
+import s from "components/profile/my-posts/myPosts.module.css";
+import {createField, TextArea} from "../../../common/forms-controls/FormsControls";
 
 export type AddPostFormData = {
     newPostText: string
@@ -15,7 +15,7 @@ const AddPostForm: React.FC<InjectedFormProps<AddPostFormData>> = (props) => {
         <div className={s.addPostBlock}>
             <form onSubmit={props.handleSubmit}>
                 <div className={"generalInput"}>
-                    {createField<AddPostFormDataKeys>("Post your message", "newPostText", [required], TextArea)}
+                    {createField<AddPostFormDataKeys>("post your message", "newPostText", [required], TextArea)}
                 </div>
                 <div>
                     <button className={"button"}>Add post</button>

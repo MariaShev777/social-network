@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     getStatusTC,
@@ -14,6 +13,7 @@ import {withAuthRedirect} from "hoc/withAuthRedirect";
 import {compose} from "redux";
 import {withRouter} from "utils/withRouter";
 import { NavigateFunction, Params } from "react-router-dom";
+import Profile from "components/profile/Profile";
 
 
 type PathParamsType = {

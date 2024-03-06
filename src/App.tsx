@@ -1,22 +1,28 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Link, Navigate, NavLink, Route, Routes} from "react-router-dom";
 import Music from "./components/music/Music";
 import News from "./components/news/News";
 import Settings from "./components/settings/Settings";
 import store, {AppStateType} from "./redux/redux-store";
-import HeaderContainer from "./components/header/HeaderContainer";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {Preloader} from "components/Common/preloader/Preloader";
+import {Preloader} from "components/common/preloader/Preloader";
 import {initialiseApp} from "redux/appReducer";
 import {UsersPage} from "components/users/UsersPage";
 import {LoginPage} from "components/login/LoginPage";
 import {withRouter} from "utils/withRouter";
+import {Layout, Menu, Avatar} from 'antd';
+import {UserOutlined} from '@ant-design/icons';
+import s from "components/navbar/navbar.module.css";
+import {AppHeader} from "components/header/Header";
 
-const DialoguesContainer = React.lazy(() => import('./components/Dialogues/DialoguesContainer'));
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const {Header, Footer, Sider, Content} = Layout;
+
+const DialoguesContainer = React.lazy(() => import('./components/dialogues/DialoguesContainer'));
+const ProfileContainer = React.lazy(() => import('./components/profile/ProfileContainer'));
+const ChatPage = React.lazy(() => import('./pages/chat/ChatPage'));
 
 
 class App extends React.Component<AppPropsType> {
@@ -39,28 +45,86 @@ class App extends React.Component<AppPropsType> {
             return <Preloader/>
         }
 
+        const contentStyle: React.CSSProperties = {
+            color: '#fff',
+        };
+
+        const siderStyle: React.CSSProperties = {
+            textAlign: 'center',
+            lineHeight: '120px',
+            color: '#fff',
+            backgroundColor: '#1677ff',
+            height: '100vh', left: 0, top: 0, bottom: 0
+        };
+
+        const footerStyle: React.CSSProperties = {
+            textAlign: 'center',
+            color: '#fff',
+            backgroundColor: '#4096ff',
+        };
+
+        const layoutStyle = {
+            width: '100%',
+            maxWidth: '1024px',
+            margin: '0 auto',
+            height: '100vh'
+        };
+
+        // @ts-ignore
         return (
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar friends={store.getState().sidebar.friends}/>
-                <div className="app-wrapper-content">
-                    <Suspense fallback={<Preloader/>}>
-                        <Routes>
-                            <Route path='/' element={<Navigate to="profile"/>}/>
-                            <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
-                            <Route path='profile' element={<ProfileContainer/>}/>
-                            <Route path="/dialogues" element={<DialoguesContainer/>}/>
-                            <Route path="/users" element={<UsersPage/>}/>
-                            <Route path="/news" element={<News/>}/>
-                            <Route path="/music" element={<Music/>}/>
-                            <Route path="/settings" element={<Settings/>}/>
-                            <Route path="/login" element={<LoginPage/>}/>
-                            {/*<Route path={'*'} render={() => <div>404 NOT FOUND</div>}/>*/}
-                        </Routes>
-                    </Suspense>
-                </div>
-            </div>
-        );
+            // <div className="app-wrapper">
+            //     <HeaderContainer/>
+            //     <Navbar friends={store.getState().sidebar.friends}/>
+            //
+            //         {/*</div>*/
+            <Layout style={layoutStyle}>
+                <AppHeader/>
+                <Layout>
+                    <Sider width="25%" style={siderStyle}>
+                        <Menu
+                            theme="dark"
+                            mode="inline"
+                            items={[
+                                {
+                                    key: '1',
+                                    label: <Link to="/profile">Profile</Link>,
+
+                                },
+                                {
+                                    key: '2',
+                                    label: <Link to="/dialogues">Messages</Link>,
+                                },
+                                {
+                                    key: '3',
+                                    label: <Link to="/users">Users</Link>,
+                                },
+                                {
+                                    key: '4',
+                                    label: <Link to="/chat">Chat</Link>,
+                                },
+                            ]}
+                        />
+                    </Sider>
+                    <Content style={contentStyle}>
+                        <div className="app-wrapper-content">
+                            <Suspense fallback={<Preloader/>}>
+                                <Routes>
+                                    <Route path='/' element={<Navigate to="profile"/>}/>
+                                    <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
+                                    <Route path='profile' element={<ProfileContainer/>}/>
+                                    <Route path="/dialogues" element={<DialoguesContainer/>}/>
+                                    <Route path="/users" element={<UsersPage/>}/>
+                                    <Route path="/login" element={<LoginPage/>}/>
+                                    <Route path="/chat" element={<ChatPage/>}/>
+                                    {/*<Route path={'*'} element={<div>404 NOT FOUND</div>}/>*/}
+                                </Routes>
+                            </Suspense>
+                        </div>
+                    </Content>
+                </Layout>
+                {/*<Footer style={footerStyle}>Footer</Footer>*/}
+            </Layout>
+        )
     }
 }
 

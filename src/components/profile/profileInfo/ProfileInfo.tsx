@@ -4,7 +4,7 @@ import {ContactsType, ProfileType} from "redux/profileReducer";
 import userPhoto from "assets/images/noname.png"
 import ProfileDataForm from "./ProfileDataForm";
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
-import {Preloader} from "components/Common/preloader/Preloader";
+import {Preloader} from "components/common/preloader/Preloader";
 
 type ProfileInfo = {
     profile: ProfileType | null

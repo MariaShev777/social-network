@@ -1,7 +1,7 @@
 import React from "react";
 import s from './profileInfo.module.css'
-import style from 'components/Common/formsControls/formsControls.module.css'
-import {createField, Input, TextArea} from "../../Common/formsControls/FormsControls";
+import style from 'components/common/forms-controls/formsControls.module.css'
+import {createField, Input, TextArea} from "../../common/forms-controls/FormsControls";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {ProfileType} from "redux/profileReducer";
 

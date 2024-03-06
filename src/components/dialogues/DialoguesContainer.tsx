@@ -1,10 +1,11 @@
 import React from "react";
 import {DialoguesPageType, sendMessageCreator} from "redux/dialoguesReducer";
-import Dialogues from "./Dialogues";
+
 import {connect} from "react-redux";
 import {AppStateType} from "redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "hoc/withAuthRedirect";
+import Dialogues from "components/dialogues/Dialogues";
 
 
 type MapStatePropsType = {

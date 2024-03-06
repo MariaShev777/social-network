@@ -1,8 +1,8 @@
 import React from "react";
-import s from "./MyPosts.module.css";
-import Post from "./Post/Post";
+import s from "components/profile/my-posts/myPosts.module.css";
+import Post from "./post/Post";
 import {PostType} from "redux/profileReducer";
-import AddPostForm, {AddPostFormData} from "./AddPostForm/AddPostForm";
+import AddPostForm, {AddPostFormData} from "./add-post-form/AddPostForm";
 
 export type MapStateToPropsType = {
     posts: PostType[]

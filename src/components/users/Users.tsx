@@ -1,8 +1,11 @@
 import React, {useEffect} from "react";
 import {User} from './User';
-import {Pagination} from "components/Common/paginator/Pagination";
+import {Pagination} from "components/common/paginator/Pagination";
 import {UsersSearchForm} from "components/users/UsersSearchForm";
 import {FilterType, followUsersThunkCreator, getUsersThunkCreator, unfollowUsersThunkCreator} from "redux/usersReducer";
+
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate, useSearchParams } from 'react-router-dom';
 import {
     getCurrentPage,
     getFollowingInProgress,
@@ -11,8 +14,6 @@ import {
     getUsers,
     getUsersFilter
 } from "redux/users-selectors";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useSearchParams } from 'react-router-dom';
 
 
 type QueryParams = { term?: string; page?: string; friend?: string }
