@@ -35,7 +35,7 @@ const Messages = () => {
     const [messages, setMessages] = useState<ChatMessageType[]>([])
 
     useEffect(() => {
-        ws.addEventListener('message', (e) => {
+        ws.addEventListener('message', (e: MessageEvent) => {
             setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)])
         })
     }, [])
@@ -62,13 +62,20 @@ const Message = ({message}: { message: ChatMessageType }) => {
 
 
 const AddMessageForm = () => {
+    const [message, setMessage] = useState('')
+
+    const sendMessage = () => {
+        if (!message) return
+        ws.send(message)
+        setMessage('')
+    }
     return (
         <div>
             <div>
-                <textarea></textarea>
+                <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message}></textarea>
             </div>
             <div>
-                <button>Send</button>
+                <button onClick={sendMessage}>Send</button>
             </div>
         </div>
     );
