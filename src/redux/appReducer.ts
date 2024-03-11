@@ -1,4 +1,4 @@
-import {AppThunk} from "./redux-store";
+import {AppThunk} from "redux/store";
 import {FormAction} from "redux-form";
 import {getAuthUserData} from "./authReducer";
 

@@ -5,7 +5,7 @@ import {required} from "utils/validators/validators";
 import {useDispatch, useSelector} from "react-redux";
 import {logIn} from "redux/authReducer";
 import {Navigate} from "react-router-dom";
-import {AppStateType} from "redux/redux-store";
+import {AppStateType} from "redux/store";
 import s from 'components/common/forms-controls/formsControls.module.css'
 
 export type FormDataKeys = keyof FormDataType

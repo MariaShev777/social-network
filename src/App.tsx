@@ -5,7 +5,7 @@ import {Link, Navigate, NavLink, Route, Routes} from "react-router-dom";
 import Music from "./components/music/Music";
 import News from "./components/news/News";
 import Settings from "./components/settings/Settings";
-import store, {AppStateType} from "./redux/redux-store";
+import store, {AppStateType} from "redux/store";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Preloader} from "components/common/preloader/Preloader";

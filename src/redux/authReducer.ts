@@ -1,4 +1,4 @@
-import {AppThunk} from "./redux-store";
+import {AppThunk} from "redux/store";
 import {FormAction, stopSubmit} from "redux-form";
 import {ResultCode} from "types/enum";
 import {authAPI} from "api/authApi";

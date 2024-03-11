@@ -1,4 +1,4 @@
-import {AppThunk} from "./redux-store";
+import {AppThunk} from "redux/store";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType} from "types/types";
 import {ResultCode} from "types/enum";

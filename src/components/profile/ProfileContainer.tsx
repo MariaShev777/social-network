@@ -6,7 +6,7 @@ import {
     ProfileType, saveProfileTC,
     updateStatusTC, uploadPhotoTC
 } from "redux/profileReducer";
-import {AppStateType} from "redux/redux-store";
+import {AppStateType} from "redux/store";
 import {Location} from 'history';
 
 import {withAuthRedirect} from "hoc/withAuthRedirect";

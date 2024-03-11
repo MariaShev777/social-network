@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import React, {ComponentType} from "react";
-import {AppStateType} from "redux/redux-store";
+import {AppStateType} from "redux/store";
 import {connect} from "react-redux";
 
 type Props = {
