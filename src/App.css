@@ -19,14 +19,14 @@
     margin-top: 20px;
 }
 
-.button {
-    background-color: #28D42D;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-}
+/*.button {*/
+/*    background-color: #28D42D;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    color: white;*/
+/*    padding: 5px 10px;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .underConstruction {
     color: red;
