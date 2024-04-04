@@ -1,6 +1,6 @@
 {
   "name": "samurai-way",
-  "homepage": "https://MariaShev777.github.io/samurai-way-main",
+  "homepage": "https://MariaShev777.github.io/social-network",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build -r https://github.com/MariaShev777/samurai-way-main"
+    "deploy": "gh-pages -d build -r https://github.com/MariaShev777/social-network"
   },
   "eslintConfig": {
     "extends": [
