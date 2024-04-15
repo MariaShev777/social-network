@@ -3,7 +3,7 @@
     padding: 10px;
     display: flex;
     position: relative;
-
+    color: #202020;
 }
 
 .descriptionBlock img {

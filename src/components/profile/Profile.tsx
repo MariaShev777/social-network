@@ -18,7 +18,6 @@ type Props = {
 const Profile = (props: Props) => {
     return (
         <div>
-            <Button>Default Button</Button>
             <ProfileInfo isOwner={props.isOwner}
                          profile={props.profile}
                          status={props.status}

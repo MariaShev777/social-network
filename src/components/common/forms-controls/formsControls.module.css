@@ -1,11 +1,9 @@
 .formControl.error textarea,
-.formControl.error input
-{
+.formControl.error input {
     border: solid red 2px;
 }
 
-.formControl.error span
-{
+.formControl.error span {
     color: red;
 }
 
@@ -15,4 +13,29 @@
     background-color: red;
     color: white;
     width: 200px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm div > input {
+    width: 200px;
+    height: 25px;
+    padding: 5px;
+}
+
+.loginForm div input[type='checkbox'] {
+   width: 15px;
+    margin-top: 5px;
+}
+
+.loginForm div:nth-child(2) {
+    margin: 10px 0 10px;
+}
+
+.logInButton {
+    margin-top: 30px;
+    align-self: center;
 }

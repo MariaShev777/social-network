@@ -13,10 +13,11 @@
 }
 
 .app-wrapper-content {
-    grid-area: c;
-    /*background-color: #f5f4f4;*/
-    border-radius: 20px;
-    margin-top: 20px;
+    margin: 15px;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    color: #202020;
 }
 
 /*.button {*/
@@ -55,3 +56,35 @@
     border: 1px solid #28D42D;
 }
 
+
+.layoutStyle {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.siderStyle {
+    text-align: center;
+    line-height: 120px;
+    background-color: #333232;
+    /*height: 90vh;*/
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.menuStyle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    background-color: #333232;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.friendsBlock {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+}

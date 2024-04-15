@@ -49,81 +49,77 @@ class App extends React.Component<AppPropsType> {
             color: '#fff',
         };
 
-        const siderStyle: React.CSSProperties = {
-            textAlign: 'center',
-            lineHeight: '120px',
-            color: '#fff',
-            backgroundColor: '#1677ff',
-            height: '100vh', left: 0, top: 0, bottom: 0
-        };
 
-        const footerStyle: React.CSSProperties = {
-            textAlign: 'center',
-            color: '#fff',
-            backgroundColor: '#4096ff',
-        };
-
-        const layoutStyle = {
-            width: '100%',
-            maxWidth: '1024px',
-            margin: '0 auto',
-            height: '100vh'
-        };
-
-        // @ts-ignore
         return (
-            // <div className="app-wrapper">
-            //     <HeaderContainer/>
-            //     <Navbar friends={store.getState().sidebar.friends}/>
-            //
-            //         {/*</div>*/
-            <Layout style={layoutStyle}>
-                <AppHeader/>
-                <Layout>
-                    <Sider width="25%" style={siderStyle}>
-                        <Menu
-                            theme="dark"
-                            mode="inline"
-                            items={[
-                                {
-                                    key: '1',
-                                    label: <Link to="/profile">Profile</Link>,
+            <>
+                {/*<div className="app-wrapper">*/}
 
-                                },
-                                {
-                                    key: '2',
-                                    label: <Link to="/dialogues">Messages</Link>,
-                                },
-                                {
-                                    key: '3',
-                                    label: <Link to="/users">Users</Link>,
-                                },
-                                {
-                                    key: '4',
-                                    label: <Link to="/chat">Chat</Link>,
-                                },
-                            ]}
-                        />
-                    </Sider>
-                    <Content style={contentStyle}>
-                        <div className="app-wrapper-content">
-                            <Suspense fallback={<Preloader/>}>
-                                <Routes>
-                                    <Route path='/' element={<Navigate to="profile"/>}/>
-                                    <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
-                                    <Route path='profile' element={<ProfileContainer/>}/>
-                                    <Route path="/dialogues" element={<DialoguesContainer/>}/>
-                                    <Route path="/users" element={<UsersPage/>}/>
-                                    <Route path="/login" element={<LoginPage/>}/>
-                                    <Route path="/chat" element={<ChatPage/>}/>
-                                    {/*<Route path={'*'} element={<div>404 NOT FOUND</div>}/>*/}
-                                </Routes>
-                            </Suspense>
-                        </div>
-                    </Content>
+                {/*</div>*/}
+
+
+                <Layout className={'layoutStyle'}>
+                    <AppHeader/>
+                    <Layout>
+                        <Sider width="25%" className={'siderStyle'} style={{backgroundColor: '#333232'}}>
+                            <Menu className={'menuStyle'}
+                                  theme="dark"
+                                  mode="inline"
+                                  items={[
+                                      {
+                                          key: '1',
+                                          label: <Link to="/profile">Profile</Link>,
+
+                                      },
+                                      {
+                                          key: '2',
+                                          label: <Link to="/dialogues">Messages</Link>,
+                                      },
+                                      {
+                                          key: '3',
+                                          label: <Link to="/users">Users</Link>,
+                                      },
+                                      {
+                                          key: '4',
+                                          label: <Link to="/chat">Chat</Link>,
+                                      },
+                                  ]}
+                            />
+                            <div className={'friendsBlock'}>
+                                FRIENDS
+                                <div >
+                                    {/*{props.friends.map(el => {*/}
+
+                                        <div className={''}>
+                                            <img src={''}/>
+                                            <span>{}</span>
+                                        </div>
+
+                                {/*})}*/}
+                                </div>
+                            </div>
+                        </Sider>
+                        <Content style={contentStyle}>
+                            <div className="app-wrapper-content">
+                                <Suspense fallback={<Preloader/>}>
+                                    <Routes>
+                                        <Route path='/' element={<Navigate to="profile"/>}/>
+                                        <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
+                                        <Route path='profile' element={<ProfileContainer/>}/>
+                                        <Route path="/dialogues" element={<DialoguesContainer/>}/>
+                                        <Route path="/users" element={<UsersPage/>}/>
+                                        <Route path="/login" element={<LoginPage/>}/>
+                                        <Route path="/chat" element={<ChatPage/>}/>
+                                        {/*<Route path={'*'} element={<div>404 NOT FOUND</div>}/>*/}
+                                    </Routes>
+                                </Suspense>
+                            </div>
+                        </Content>
+                    </Layout>
+                    {/*<Footer style={footerStyle}>Footer</Footer>*/}
                 </Layout>
-                {/*<Footer style={footerStyle}>Footer</Footer>*/}
-            </Layout>
+
+            </>
+
         )
     }
 }

@@ -7,6 +7,8 @@ import {logIn} from "redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {AppStateType} from "redux/store";
 import s from 'components/common/forms-controls/formsControls.module.css'
+import styles from './login.module.css'
+import {Button} from "antd";
 
 export type FormDataKeys = keyof FormDataType
 export type FormDataType = {
@@ -26,7 +28,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
                                                                                                            captchaUrl
                                                                                                        }) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.loginForm}>
             {createField<FormDataKeys>("Email", "email", [required], Input)}
             {createField<FormDataKeys>("Password", "password", [required], Input, {type: "password"})}
             {createField<FormDataKeys>(undefined, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
@@ -37,8 +39,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
             {error && <div className={s.formSummaryError}>
                 {error}
             </div>}
-            <div>
-                <button>Log in</button>
+            <div className={s.logInButton}>
+                <Button type="primary" style={{backgroundColor: '#00ff18', color: '#202020'}}>Log In</Button>
             </div>
         </form>
     )
@@ -64,7 +66,7 @@ export const LoginPage = () => {
         return <Navigate to={'/profile'}/>
     }
 
-    return <div>
+    return <div className={styles.loginPage}>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
     </div>

@@ -38,7 +38,7 @@ export const Input = (props: WrappedFieldProps) => {
 
     return (
         <FormControl {...props}>
-            <input {...input} {...restProps}/>
+            <input type={'text'}{...input} {...restProps}/>
         </FormControl>
     )
 }
