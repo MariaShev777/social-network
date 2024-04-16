@@ -1,5 +1,5 @@
 # Social Network
-
+![](https://i.imgur.com/l3k3n9N.png)
 ***Stack***
 
 TypeScript, React, Redux, Formik, React Router, AntD
@@ -13,7 +13,7 @@ Social Network App is an online service for communicating with people who have s
 or backgrounds and sharing content between them. 
 The primary goal of this social media is to build connections with others and to share opinions and ideas.
 
-![](https://i.imgur.com/D9LX4LI.jpeg)
+![](https://i.imgur.com/ATpqGgz.png)
 
 ## Features
 - Login as a user.
