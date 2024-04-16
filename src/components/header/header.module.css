@@ -1,13 +1,17 @@
 .header {
-    grid-area: h;
-    padding-bottom: 50px;
-    padding-top: 10px;
+    color: #fff;
+    height: 64px;
+    padding: 0 36px;
+    line-height: 64px;
+    background-color: #333232;
+    justify-content: space-between;
 }
 
 .header img {
-    width: 85px;
-    margin-left: 15px;
+    width: 200px;
+    margin-left: 10px;
 }
+
 .loginBlock {
     float: right;
     margin-top: 15px;
@@ -17,5 +21,10 @@
     align-items: baseline;
 }
 
-
-
+.logoutBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #00ff18;
+    font-size: 16px;
+}

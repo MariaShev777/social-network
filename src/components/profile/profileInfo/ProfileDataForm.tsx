@@ -40,6 +40,7 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, ProfileFormDataCo
                 <div><b>Contacts:</b> {Object.keys(profile.contacts ?? {}).map(key => {
                     return <div>
                         <b>{key}:</b> {createField(key, 'contacts.' + key, [], Input)}
+
                     </div>
                 })}
                 </div>

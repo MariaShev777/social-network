@@ -1,8 +1,6 @@
 import React from 'react';
 import s from 'components/profile/my-posts/post/post.module.css';
-import {LikedIcon, NotLikedIcon} from "assets";
-
-
+import {LikedIcon} from "assets";
 
 
 type Props = {
@@ -13,12 +11,15 @@ type Props = {
 const Post = (props: Props) => {
     return (
         <div className={s.item}>
-            <img src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1" alt={'picture'}/>
-            {props.message}
+            <div className={s.avaMessage}>
+                <img src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1"
+                     alt={'picture'}/>
+                <div>{props.message}</div>
+            </div>
+
             <div className={s.likes}>
-                <span>
-                    <LikedIcon />
-                    <NotLikedIcon />
+                <span className={s.likesBlock}>
+                    <LikedIcon/>
                     {props.likesCount}
                 </span>
             </div>

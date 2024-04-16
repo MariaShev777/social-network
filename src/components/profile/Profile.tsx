@@ -2,7 +2,6 @@ import React from "react";
 import {ProfileType} from "redux/profileReducer";
 import MyPostsContainer from "components/profile/my-posts/MyPostsContainer";
 import ProfileInfo from "components/profile/profileInfo/ProfileInfo";
-import {Button} from "antd";
 
 
 type Props = {

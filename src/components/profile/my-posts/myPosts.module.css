@@ -1,5 +1,22 @@
 .postsBlock {
     padding: 10px;
+    background-color: #fff;
+    margin-top: 25px;
+    border-radius: 15px;
+    overflow-y: auto;
+}
+
+.postsForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.postsForm h3{
+    font-size: 32px;
+    font-family: 'Montserrat Thin', sans-serif;
+    margin-bottom: 15px;
 }
 
 .posts {
@@ -9,5 +26,5 @@
 
 .addPostBlock {
     display: flex;
-    justify-content: space-between;
+    gap: 30px;
 }

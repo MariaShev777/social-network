@@ -39,10 +39,10 @@ export type ProfilePageType = {
 
 let initialState: ProfilePageType = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 15},
-        {id: 2, message: "It's my first post", likesCount: 21},
-        {id: 3, message: "WoW", likesCount: 25},
-        {id: 4, message: "See ya", likesCount: 29}
+        {id: 1, message: "JavaScript is a scripting or programming language that allows you to implement complex features on web pages.", likesCount: 105},
+        {id: 2, message: "Hi, how are you?", likesCount: 9},
+        {id: 3, message: "I'm gonna drink some Coke", likesCount: 17},
+        {id: 4, message: "It's my first post!!!", likesCount: 21},
     ],
     profile: null,
     status: ''

@@ -3,7 +3,6 @@
     height: 100px;
 }
 
-
 .userContainer {
     /*background-color: #faa9c2;*/
     margin-bottom: 20px;
@@ -11,18 +10,3 @@
     text-align: center;
     width: 235px;
 }
-
-.avaAndButton {
-    /*flex-direction: row;*/
-}
-
-
-/*button {*/
-/*    !*border-color: #28D42D;*!*/
-/*    border: 1px solid #28D42D;*/
-/*    border-radius: 5px;*/
-/*    color: #28D42D;*/
-/*    background-color: white;*/
-/*    padding: 5px 10px;*/
-/*    cursor: pointer;*/
-/*}*/

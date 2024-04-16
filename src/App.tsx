@@ -1,11 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
-import Navbar from "./components/navbar/Navbar";
-import {Link, Navigate, NavLink, Route, Routes} from "react-router-dom";
-import Music from "./components/music/Music";
-import News from "./components/news/News";
-import Settings from "./components/settings/Settings";
-import store, {AppStateType} from "redux/store";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {AppStateType} from "redux/store";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {Preloader} from "components/common/preloader/Preloader";
@@ -13,12 +9,11 @@ import {initialiseApp} from "redux/appReducer";
 import {UsersPage} from "components/users/UsersPage";
 import {LoginPage} from "components/login/LoginPage";
 import {withRouter} from "utils/withRouter";
-import {Layout, Menu, Avatar} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
-import s from "components/navbar/navbar.module.css";
+import {Layout} from 'antd';
 import {AppHeader} from "components/header/Header";
+import {Navbar} from "components/navbar/Navbar";
 
-const {Header, Footer, Sider, Content} = Layout;
+const {Content} = Layout;
 
 const DialoguesContainer = React.lazy(() => import('./components/dialogues/DialoguesContainer'));
 const ProfileContainer = React.lazy(() => import('./components/profile/ProfileContainer'));
@@ -47,57 +42,16 @@ class App extends React.Component<AppPropsType> {
 
         const contentStyle: React.CSSProperties = {
             color: '#fff',
+            backgroundColor: '#333232',
         };
 
 
         return (
             <>
-                {/*<div className="app-wrapper">*/}
-
-                {/*</div>*/}
-
-
                 <Layout className={'layoutStyle'}>
                     <AppHeader/>
                     <Layout>
-                        <Sider width="25%" className={'siderStyle'} style={{backgroundColor: '#333232'}}>
-                            <Menu className={'menuStyle'}
-                                  theme="dark"
-                                  mode="inline"
-                                  items={[
-                                      {
-                                          key: '1',
-                                          label: <Link to="/profile">Profile</Link>,
-
-                                      },
-                                      {
-                                          key: '2',
-                                          label: <Link to="/dialogues">Messages</Link>,
-                                      },
-                                      {
-                                          key: '3',
-                                          label: <Link to="/users">Users</Link>,
-                                      },
-                                      {
-                                          key: '4',
-                                          label: <Link to="/chat">Chat</Link>,
-                                      },
-                                  ]}
-                            />
-                            <div className={'friendsBlock'}>
-                                FRIENDS
-                                <div >
-                                    {/*{props.friends.map(el => {*/}
-
-                                        <div className={''}>
-                                            <img src={''}/>
-                                            <span>{}</span>
-                                        </div>
-
-                                {/*})}*/}
-                                </div>
-                            </div>
-                        </Sider>
+                        <Navbar/>
                         <Content style={contentStyle}>
                             <div className="app-wrapper-content">
                                 <Suspense fallback={<Preloader/>}>
@@ -115,11 +69,8 @@ class App extends React.Component<AppPropsType> {
                             </div>
                         </Content>
                     </Layout>
-                    {/*<Footer style={footerStyle}>Footer</Footer>*/}
                 </Layout>
-
             </>
-
         )
     }
 }
@@ -136,7 +87,7 @@ type MapStateToPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        initialised: state.app.initialised
+        initialised: state.app.initialised,
     }
 }
 

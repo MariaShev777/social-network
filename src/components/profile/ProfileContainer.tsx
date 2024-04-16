@@ -39,27 +39,11 @@ type Props = PathParamsType & OwnPropsType
 
 function ProfileContainer(props: Props) {
 
-    // useEffect(() => {
-    //     let userId: number | null = +props.match.params.userId;
-    //     if (!userId) {
-    //         userId = props.authorisedUserId;
-    //         if (!userId) {
-    //             props.history.push("/login")
-    //         }
-    //     }
-    //     props.getUserProfileTC(userId as number)
-    //     props.getStatusTC(userId as number)
-    // }, [props.match.params.userId])
-
     const refreshProfile = () => {
         console.log(props.router)
         let userID = props.router.params.userId
 
         if (!userID) userID = props.authorisedUserId?.toString()
-        // if (!userID) {
-        //     this.props.router.location.pathname ="/login"
-        // }
-        //вроде все работает, проверить не показывает ли профиль после logout
 
         if (!userID) {
             console.error("ID should exist in URI params or in state")
@@ -69,16 +53,9 @@ function ProfileContainer(props: Props) {
         }
     }
 
-
     useEffect(() => {
         refreshProfile()
     }, [])
-
-    // useEffect(function (prevProps: Props) {
-    //     if (prevProps.router.params.userId !== props.router.params.userId) refreshProfile()
-    // }, [])
-
-
 
     return (
         <Profile {...props}

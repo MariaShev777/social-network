@@ -29,9 +29,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
                                                                                                        }) => {
     return (
         <form onSubmit={handleSubmit} className={s.loginForm}>
+            Enter your email
             {createField<FormDataKeys>("Email", "email", [required], Input)}
+            Enter your password
             {createField<FormDataKeys>("Password", "password", [required], Input, {type: "password"})}
-            {createField<FormDataKeys>(undefined, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
+            <div className={s.checkbox}>
+                {createField<FormDataKeys>(undefined, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
+            </div>
+
 
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl && createField<FormDataKeys>("Enter symbols from image", "captcha", [required], Input, {})}
@@ -49,7 +54,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormPropsType> & 
 const LoginReduxForm = reduxForm<FormDataType, LoginFormPropsType>({
     form: 'login'
 })(LoginForm)
-
 
 
 export const LoginPage = () => {

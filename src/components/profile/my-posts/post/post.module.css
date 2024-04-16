@@ -1,14 +1,33 @@
 .item {
-    color: navy;
+    color: #001529;
     padding: 10px 0;
+    margin-left: 10px;
+    border-bottom: 1px solid rgba(40, 212, 45, 0.2);
 }
 
 .item img {
     width: 80px;
-    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    top: 4px;
 }
 .item .likes {
-    color: red;
+    color: black;
+    margin-left: 5px;
 }
+
+.avaMessage {
+    display: flex;
+    align-items: end;
+}
+
+.likesBlock {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    margin-top: 3px;
+}
+
+
 
 

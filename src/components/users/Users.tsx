@@ -59,19 +59,14 @@ export const Users = () => {
 
         const term = filter.term
         const friend = filter.friend
-        // `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
 
         if (!!term) query.term = term
         if (friend !== null) query.friend = String(friend)
         if (currentPage !== 1) query.page = String(currentPage)
 
-        // const queryToString = new URLSearchParams(query)
         setSearchParams(query)
 
-        // navigate('/users')
-        // setSearchParams(queryToString.toString())
     }, [filter, currentPage])
-
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(getUsersThunkCreator(pageNumber, pageSize, filter))

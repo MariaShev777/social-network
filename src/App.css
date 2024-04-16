@@ -1,33 +1,10 @@
-.app-wrapper {
-    margin: 0 auto;
-    display: grid;
-    width: 1200px;
-    /*gap: 20px;*/
-    grid-template-areas:
-  "h h"
-  "n c";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    /*grid-gap: 5px;*/
-
-}
-
 .app-wrapper-content {
-    margin: 15px;
     height: 90vh;
-    display: flex;
     justify-content: center;
     color: #202020;
+    padding-right: 20px;
+    margin-left: 10px;
 }
-
-/*.button {*/
-/*    background-color: #28D42D;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    color: white;*/
-/*    padding: 5px 10px;*/
-/*    cursor: pointer;*/
-/*}*/
 
 .underConstruction {
     color: red;
@@ -35,56 +12,23 @@
     margin: 20px;
 }
 
-.generalInput {
+.generalInput textarea{
     border: 1px solid #28D42D;
-    width: 200px;
     resize: none;
     border-radius: 5px;
+    width: 500px;
+    padding: 10px;
 }
 
-.generalInput[type='text']:hover {
-    /*background-color: #eeecec;*/
-    box-shadow: 0 1px 5px #c2c2c2;
+.generalInput textarea::placeholder{
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.3);
+    line-height: 32px;
 }
-
-
-.generalInput[type='text']:focus {
-    outline: none;
-    /*box-shadow: none;*/
-    /*background-color: rgb(243, 253, 243);*/
-    box-shadow: inset 0 1px 5px #c2c2c2;
-    border: 1px solid #28D42D;
-}
-
 
 .layoutStyle {
     width: 100%;
     max-width: 1024px;
     margin: 0 auto;
     height: 100vh;
-}
-
-.siderStyle {
-    text-align: center;
-    line-height: 120px;
-    background-color: #333232;
-    /*height: 90vh;*/
-    left: 0;
-    top: 0;
-    bottom: 0;
-}
-
-.menuStyle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    background-color: #333232;
-    color: #fff;
-    margin-top: 10px;
-}
-
-.friendsBlock {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    color: #fff;
-    margin-top: 20px;
 }
